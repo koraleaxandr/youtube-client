@@ -5,24 +5,6 @@
   ],
   "overrides": [
     {
-      "files": ["*.ts"],
-      "parserOptions": {
-        "project": [
-          "tsconfig.*?.json",
-          "e2e/tsconfig.json"
-        ],
-        "createDefaultProgram": true
-      },
-      "extends": [
-        "plugin:@angular-eslint/recommended",
-        // AirBnB Styleguide rules
-        "airbnb-typescript/base"
-      ],
-      "rules": {
-        
-      }
-    },
-    {
       "files": [
         "*.ts"
       ],
@@ -34,7 +16,8 @@
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "airbnb-typescript/base"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
