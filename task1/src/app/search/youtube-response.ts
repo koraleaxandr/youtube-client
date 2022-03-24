@@ -9,7 +9,7 @@ export const searchResponse: SearchResponse = JSON.parse(JSON.stringify({
   },
   "items": [
     {
-      "kind": "youtube#video",
+      'kind': "youtube#video",
       "etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/tmmI1yiRrmLWlKikXk1gD3TXsUI\"",
       "id": "YN8zNnV0sK8",
       "snippet": {
