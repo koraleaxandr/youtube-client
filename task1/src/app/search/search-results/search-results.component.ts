@@ -11,14 +11,15 @@ import { Item } from '../search-item.model';
 export class SearchResultsComponent implements OnInit {
   selectedItem?: Item;
 
-  constructor() { }
+  // constructor() { }
 
   ngOnInit(): void {
+    console.log('search-results.component');
   }
 
   response = searchResponse;
 
-  onSelect(item: Item): void {
+  public onSelect(item: Item): void {
     this.selectedItem = item;
   }
 }

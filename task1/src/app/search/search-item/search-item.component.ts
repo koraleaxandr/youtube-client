@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from '../search-item.model';
+// import { Item } from '../search-item.model';
 
 @Component({
   selector: 'app-search-item',
@@ -7,8 +7,9 @@ import { Item } from '../search-item.model';
   styleUrls: ['./search-item.component.scss'],
 })
 export class SearchItemComponent implements OnInit {
-  constructor() { }
+  // constructor() { }
 
   ngOnInit(): void {
+    console.log('search-item.component');
   }
 }
