@@ -1,1 +1,12 @@
 <p>search-item works!</p>
+
+<div *ngIf="selectedItem">
+
+  <h2>SELECTED VIDEO:{{selectedItem.snippet.title}} </h2>
+  <div>id: {{selectedItem.id}}</div>
+  <div>
+    <label for="item-name">Channel: </label>
+    <input id="item-name" [(ngModel)]="selectedItem.snippet.channelTitle" placeholder="channelTitle">
+  </div>
+<img src={{selectedItem.snippet.thumbnails.high.url}} alt={{selectedItem.snippet.title}}>
+</div>

@@ -4,20 +4,24 @@
   list-style-type: none;
   padding: 0;
 display:grid;
-grid-template-columns: repeat(3, 1fr);
+grid-template-columns: repeat(4, 1fr);
 }
 
 .items li {
   display: flex;
+  min-height: 30vh;
   flex-flow:column;
-  border: solid 2px grey;  
+  border: solid 2px grey;
 }
 
 .items button {
+  width: 100%;
   flex: 1;
   cursor: pointer;
   position: relative;
   background-color: #EEE;
+  background-size: auto;
+  background-repeat: no-repeat;
   margin: 0 auto;
   padding: 0;
   border-radius: 4px;
@@ -38,8 +42,9 @@ grid-template-columns: repeat(3, 1fr);
 }
 
 .items button.selected {
-  background-color: black;
+  background-color: rgb(7, 30, 243);
   color: white;
+  border: blue solid 5px;
 }
 
 .items button.selected:hover {
@@ -57,7 +62,6 @@ grid-template-columns: repeat(3, 1fr);
   width: 100%;
   font-size: medium;
   color: white;
-  padding: 0.8em 0.7em 0 0.7em;
   background-color: #405061;
   line-height: 1em;
   margin-right: .8em;

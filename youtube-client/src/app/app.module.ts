@@ -10,6 +10,9 @@ import { HeaderComponent } from './header/header.component';
 import { SearchComponent } from './search/search.component';
 import { SearchResultsComponent } from './search/search-results/search-results.component';
 import { SearchItemComponent } from './search/search-item/search-item.component';
+import { HeaderSearchComponent } from './header/header-search/header-search.component';
+import { HeaderLoginComponent } from './header/header-login/header-login.component';
+import { DropdownSettingsComponent } from './header/header-search/dropdown-settings/dropdown-settings.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { SearchItemComponent } from './search/search-item/search-item.component'
     SearchComponent,
     SearchResultsComponent,
     SearchItemComponent,
+    HeaderSearchComponent,
+    HeaderLoginComponent,
+    DropdownSettingsComponent,
   ],
   imports: [
     BrowserModule,

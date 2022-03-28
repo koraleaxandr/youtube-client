@@ -9,6 +9,4 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'youtube-client';
-
-  name = 'RSS Student';
 }
