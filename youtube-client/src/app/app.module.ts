@@ -12,7 +12,7 @@ import { SearchResultsComponent } from './search/search-results/search-results.c
 import { SearchItemComponent } from './search/search-item/search-item.component';
 import { HeaderSearchComponent } from './header/header-search/header-search.component';
 import { HeaderLoginComponent } from './header/header-login/header-login.component';
-import { DropdownSettingsComponent } from './header/header-search/dropdown-settings/dropdown-settings.component';
+import { DropdownSettingsComponent } from './header/dropdown-settings/dropdown-settings.component';
 
 @NgModule({
   declarations: [
