@@ -6,6 +6,14 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -89,6 +97,7 @@ typings/
 
 # vuepress build output
 .vuepress/dist
+.dist
 
 # Serverless directories
 .serverless/
@@ -101,3 +110,5 @@ typings/
 
 # TernJS port file
 .tern-port
+
+.vscode/
