@@ -1,0 +1,22 @@
+<p>search-results works!</p>
+
+<div *ngIf="selectedItem">
+
+  <h2>SELECTED VIDEO:{{selectedItem.snippet.title}} </h2>
+  <div>id: {{selectedItem.id}}</div>
+  <div>
+    <label for="item-name">Channel: </label>
+    <input id="item-name" [(ngModel)]="selectedItem.snippet.channelTitle" placeholder="channelTitle">
+  </div>
+<img src={{selectedItem.snippet.thumbnails.high.url}} alt={{selectedItem.snippet.title}}>
+</div>
+
+
+<h2>Searched VIDEOS</h2>
+<ul class="items">
+  <li *ngFor="let item of response.items">
+    <span class="badge">{{item.snippet.title}}</span> <button [class.selected]="item === selectedItem"type="button" (click)="onSelect(item)" >
+    <img src={{item.snippet.thumbnails.high.url}} alt={{item.snippet.title}}>
+    </button>
+  </li>
+</ul>
