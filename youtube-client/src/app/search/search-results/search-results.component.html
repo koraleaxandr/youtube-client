@@ -1,10 +1,12 @@
-<p>search-results works!</p>
-
-<app-search-item [selectedItem]="selectedItem"></app-search-item>
-<h2>Searched VIDEOS</h2>
-<ul class="items">
-  <li *ngFor="let item of response.items">
-    <span class="badge">{{item.snippet.title | uppercase}}</span> <button [class.selected]="item === selectedItem"type="button" (click)="onSelect(item)" [ngStyle]="{'background-image': 'url(' + item.snippet.thumbnails.high.url + ')'}">
-    </button>
-  </li>
-</ul>
+<div class="search-result-container" *ngIf="searchResponse">
+  <app-search-item [selectedItem]="selectedItem"></app-search-item>
+  <h2>Searched VIDEOS</h2>
+  <ul class="items">
+    <li *ngFor="let item of searchResponse.items">
+      <div class="list-item-thumbnail"
+        [ngStyle]="{'background-image': 'url(' + item.snippet.thumbnails.medium.url + ')'}"></div>
+      <span class="badge">{{item.snippet.title | uppercase}}</span>
+      <button [class.selected]="item === selectedItem" type="button" (click)="onSelect(item)">more...</button>
+    </li>
+  </ul>
+</div>

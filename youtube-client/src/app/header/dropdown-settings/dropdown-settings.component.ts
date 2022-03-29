@@ -7,10 +7,10 @@ import { SortSettings } from '../../models/sort-settings.model';
   styleUrls: ['./dropdown-settings.component.scss'],
 })
 export class DropdownSettingsComponent implements OnInit {
-  
+
   sortSettings: SortSettings = {
-  sortByParameter: string = 'date';
-  sortString: string = '';
+  sortByParameter: 'date',
+  sortString: ''
   }
 
   @Input() settings?: string;

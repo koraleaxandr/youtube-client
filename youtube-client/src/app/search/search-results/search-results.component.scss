@@ -1,33 +1,56 @@
-/* HeroesComponent's private CSS styles */
+.search-result-container {
+  width: 100%;
+  height: 100%;
+  max-width: 1440px;
+  // max-height: 1100px;
+  // overflow:scroll;
+}
+
 .items {
-  margin: 0 0 2em 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto;
   list-style-type: none;
   padding: 0;
 display:grid;
 grid-template-columns: repeat(4, 1fr);
+grid-gap: 30px
 }
 
 .items li {
+  width: 264px;
+  height: 327px;
   display: flex;
   min-height: 30vh;
+  border-radius: 4px;
+  flex-direction: column;
   flex-flow:column;
-  border: solid 2px grey;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.list-item-thumbnail {
+  width: 223px;
+  height: 123px;
+  margin: 20px;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .items button {
-  width: 100%;
-  flex: 1;
+  align-self: flex-end;
+  justify-self: flex-end;
+  align-self: end;
+  width: 120px;
+  height: 32px;
   cursor: pointer;
   position: relative;
-  background-color: #EEE;
-  background-size: auto;
-  background-repeat: no-repeat;
-  margin: 0 auto;
-  padding: 0;
+  background-color: #2F80ED;
+  margin: 10px auto;
   border-radius: 4px;
   display: flex;
-  align-items: stretch;
-  height: 1.8em;
+  align-items: center;
+  justify-content: center;
 }
 
 .items button:hover {

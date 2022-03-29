@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SortSettings} from '../models/sort-settings.model';
+import { SearchResponse } from '../models/search-response.model';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,10 @@ import { SortSettings} from '../models/sort-settings.model';
 })
 export class HeaderComponent implements OnInit {
   sortSettings: SortSettings = {
-  sortByParameter: string = 'date';
-  sortString: string = '';
+  sortByParameter : 'date',
+  sortString : ''
   }
+  searchResponse: SearchResponse | null = null;
   settings: string = 'off';
   // constructor() { }
 
@@ -20,5 +22,9 @@ export class HeaderComponent implements OnInit {
 
   toggleSettings(settings: string): void {
     this.settings = settings;
+  }
+
+  getSearchResponse(data: SearchResponse) {
+    this.searchResponse = data;
   }
 }

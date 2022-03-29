@@ -9,8 +9,10 @@ import { SortSettings } from '../../models/sort-settings.model';
   templateUrl: './header-search.component.html',
   styleUrls: ['./header-search.component.scss'],
 })
+
 export class HeaderSearchComponent implements OnInit {
   @Output() toggle = new EventEmitter<string>();
+  @Output() searchResponse = new EventEmitter<SearchResponse>();
 
   name = 'What are you want to find out?';
 
@@ -29,6 +31,7 @@ export class HeaderSearchComponent implements OnInit {
     console.log(searchResponse);
     const data: SearchResponse = await searchResponse.json() as unknown as SearchResponse;
     console.log(data);
+    this.searchResponse.emit(data);
     return data;
   }
 

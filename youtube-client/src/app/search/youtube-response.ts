@@ -1,4 +1,4 @@
-import { SearchResponse } from "./search-response.model";
+import { SearchResponse } from '../models/search-response.model'
 
 export const searchResponse: SearchResponse = JSON.parse(JSON.stringify({
   "kind": "youtube#videoListResponse",

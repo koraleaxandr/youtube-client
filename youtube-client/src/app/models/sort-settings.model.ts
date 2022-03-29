@@ -1,4 +1,4 @@
 export interface SortSettings {
   sortByParameter: string,
-  sortstring: string
+  sortString: string
 }
