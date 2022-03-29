@@ -1,12 +1,15 @@
 <div class="search-result-container" *ngIf="searchResponse">
   <app-search-item [selectedItem]="selectedItem"></app-search-item>
-  <h2>Searched VIDEOS</h2>
   <ul class="items">
     <li *ngFor="let item of searchResponse.items">
       <div class="list-item-thumbnail"
         [ngStyle]="{'background-image': 'url(' + item.snippet.thumbnails.medium.url + ')'}"></div>
-      <span class="badge">{{item.snippet.title | uppercase}}</span>
+        <div class="item-statistic-container">
+
+        </div>
+      <p class="badge">{{item.snippet.title | uppercase}}</p>
       <button [class.selected]="item === selectedItem" type="button" (click)="onSelect(item)">more...</button>
+      <div class="item-bottom-line"></div>
     </li>
   </ul>
 </div>

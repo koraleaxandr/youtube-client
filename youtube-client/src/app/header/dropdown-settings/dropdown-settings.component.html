@@ -1,4 +1,4 @@
-<div class="dropdown-settings-container active" [class.active]="settings === 'on'">
+<div class="dropdown-settings-container" [class.active]="settings === 'on'">
 <div class="search-settings-container">
   Sorting by:
   <button [class.selected]="sortSettings.sortByParameter === 'date'" (click)="sortSettings.sortByParameter = 'date'">date</button>
@@ -7,3 +7,4 @@
   <input type="text" [(ngModel)]="sortSettings.sortString" style="border: transparent">
 </div>
 </div>
+<div class="search-settings-container-pushing" [class.active]="settings === 'on'"></div>

@@ -15,8 +15,7 @@ h2, h3 {
   font-weight: lighter;
 }
 body {
-  background-color: #E5E5E5;
-  // margin: 2em;
+  background-color: #ffffff;
 }
 body, input[type="text"], button {
   color: #333;
@@ -27,16 +26,20 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  color: black;
-  font-size: 1.2rem;
+  color: white;
+  font-size: 12px;
+  font-family: Roboto;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
   padding: 1rem;
   margin-right: 1rem;
   margin-bottom: 1rem;
   margin-top: 1rem;
+  box-shadow: 2px 0px 4px #2F80ED;
 }
 button:hover {
-  background-color: black;
-  color: white;
+  box-shadow: none;
 }
 button:disabled {
   background-color: #eee;
