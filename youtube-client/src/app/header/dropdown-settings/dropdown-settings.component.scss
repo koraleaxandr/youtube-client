@@ -6,11 +6,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 2s;
+  transition: transform 0.8s;
 }
 
 .dropdown-settings-container.active {
-  top: 80px;
+  transform: translateY(80px);
 }
 
 .search-settings-container {
@@ -27,6 +27,9 @@
   background: none;
   color: #2F80ED;
   text-transform: lowercase;
+}
+
+.search-settings-container button.selected {
   text-decoration: underline;
 }
 
