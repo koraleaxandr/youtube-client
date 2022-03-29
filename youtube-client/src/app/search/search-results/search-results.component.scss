@@ -44,7 +44,36 @@ grid-gap: 30px
   height: 13px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1.5fr repeat(3, 1fr);
+  gap: 10px;
+}
+
+.item-statistic {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left;
+  text-align: end;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+}
+
+.views {
+  background-image: url(../../../assets/svg/viewed.svg);
+}
+
+.likes {
+  background-image: url(../../../assets/svg/liked.svg);
+}
+
+.dislikes {
+  background-image: url(../../../assets/svg/dislike.svg);
+}
+
+.comments {
+  background-image: url(../../../assets/svg/comments.svg);
 }
 
 .items button {
