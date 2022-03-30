@@ -28,9 +28,7 @@ export class HeaderSearchComponent implements OnInit {
     const url = `https://raw.githubusercontent.com/rolling-scopes-school/tasks/aaacab024b04449e1ae31a938a6983ffb7e7549a/tasks/angular/response.json
     `;
     const searchResponse: Response = await fetch(url);
-    console.log(searchResponse);
     const data: SearchResponse = await searchResponse.json() as unknown as SearchResponse;
-    console.log(data);
     this.searchResponse.emit(data);
     return data;
   }
