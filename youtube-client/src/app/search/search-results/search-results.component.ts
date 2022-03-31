@@ -31,8 +31,9 @@ export class SearchResultsComponent implements OnInit {
     let color = 'blue';
     const dateNow = new Date();
     const millisecondsInWeek: number = 7*24*60*60*1000;
-    const publicationDate = new Date(publicationAt).getTime();
-    color = (dateNow - publicationDate) > millisecondsInWeek ? 'green' : 'blue';
+    const publicationDate = new Date(publicationAt);
+    color = (Number(dateNow) - Number(publicationDate.getTime())) >= millisecondsInWeek ? 'green': 'blue';
+
 
     return color;
   }
