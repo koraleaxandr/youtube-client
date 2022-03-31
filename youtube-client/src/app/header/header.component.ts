@@ -10,21 +10,23 @@ import { SearchResponse } from '../models/search-response.model';
 export class HeaderComponent implements OnInit {
   sortSettings: SortSettings = {
   sortByParameter : 'date',
+  sortByIncreaseParameter: 'increase',
   sortString : ''
   }
   searchResponse: SearchResponse | null = null;
-  settings: string = 'off';
+  toggleSettings: string = 'off';
   // constructor() { }
 
   ngOnInit(): void {
     console.log('header.component');
   }
 
-  toggleSettings(settings: string): void {
-    this.settings = settings;
+  toggleDropSettings(toggle: string): void {
+    this.toggleSettings = toggle;
   }
 
   getSearchResponse(data: SearchResponse) {
     this.searchResponse = data;
   }
+
 }

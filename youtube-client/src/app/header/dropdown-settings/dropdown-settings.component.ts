@@ -10,10 +10,11 @@ export class DropdownSettingsComponent implements OnInit {
 
   sortSettings: SortSettings = {
   sortByParameter: 'date',
+  sortByIncreaseParameter: 'increase',
   sortString: ''
   }
 
-  @Input() settings?: string;
+  @Input() toggleSettings?: string;
 
   // constructor() { }
 

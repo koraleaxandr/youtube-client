@@ -2,6 +2,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "/youtube-client/dist/youtube-client/",
     "outDir": "./out-tsc/app",
     "types": []
   },
