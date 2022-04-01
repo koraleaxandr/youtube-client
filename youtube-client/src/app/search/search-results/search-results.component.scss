@@ -15,7 +15,8 @@
   padding: 0;
 display:grid;
 grid-template-columns: repeat(4, 1fr);
-grid-gap: 30px
+grid-gap: 30px;
+padding-bottom: 30px;
 }
 
 .items li {
@@ -139,6 +140,5 @@ grid-gap: 30px
   height: 5px;
   left: 1px;
   border-radius: 4px;
-  background-color: #2F80ED;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }

@@ -8,11 +8,9 @@ import { SearchResponse } from '../../models/search-response.model';
   styleUrls: ['./search-results.component.scss'],
 })
 export class SearchResultsComponent implements OnInit {
-  selectedItem?: Item;
-  dateOptions = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
-  date = new Date().toLocaleDateString('en-en');
-  date1 = new Date('2019-10-29T15:00:14.000Z').getTime();
 
+  selectedItem?: Item;
+  date = new Date().toLocaleDateString('en-en');
 
   @Input() searchResponse?: SearchResponse | null;
 
@@ -20,21 +18,33 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Date now ' + this.date);
-    console.log('Date  ' + this.date1);
   }
 
-  public onSelect(item: Item): void {
+  onSelect(item: Item): void {
     this.selectedItem = item;
   }
 
-  public getColorPublicationDate (publicationAt: string): string {
+  getColorPublicationDate (publishedAt: string): string {
     let color = 'blue';
-    const dateNow = new Date();
     const millisecondsInWeek: number = 7*24*60*60*1000;
-    const publicationDate = new Date(publicationAt);
-    color = (Number(dateNow) - Number(publicationDate.getTime())) >= millisecondsInWeek ? 'green': 'blue';
-
-
+    const today = new Date();
+    const publicationDate = new Date(publishedAt);
+    const getDateYear = (date: Date): number => Number(date.getUTCFullYear());
+    const getDateMonth = (date: Date): number => Number(date.getUTCMonth() + 1);
+    const getDateDay = (date: Date): number => Number(today.getUTCDate());
+    if (getDateYear(today) > getDateYear(publicationDate)) {
+      color = 'red';
+      return color;
+    } else if (((getDateMonth(today) - getDateMonth(publicationDate))>= 6) && (getDateDay(today)> getDateDay(publicationDate))) {
+      color = 'red';
+      return color;
+    } else if (getDateMonth(today) > getDateMonth(publicationDate)) {
+      color = 'yellow';
+      return color;
+    }else if ((Number(today) - Number(publicationDate.getTime())) >= millisecondsInWeek) {
+      color = 'blue';
+      return color;
+    } else color = 'green';
     return color;
   }
 }

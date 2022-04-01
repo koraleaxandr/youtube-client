@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { SortSettings} from '../models/sort-settings.model';
 import { SearchResponse } from '../models/search-response.model';
 
@@ -9,7 +9,7 @@ import { SearchResponse } from '../models/search-response.model';
 })
 export class HeaderComponent implements OnInit {
   sortSettings: SortSettings = {
-  sortByParameter : 'date',
+  sortByParameter : 'snippet.publishedAt',
   sortByIncreaseParameter: 'increase',
   sortString : ''
   }
@@ -27,6 +27,18 @@ export class HeaderComponent implements OnInit {
 
   getSearchResponse(data: SearchResponse) {
     this.searchResponse = data;
+    if(data) this.sortSearchResponse(searchResponse);
+  }
+
+  changeSortSettings(cangedSortSettings: SortSettings) {
+    this.sortSettings = cangedSortSettings;
+  }
+
+  sortSearchResponse(inputSearchResponse: SearchResponse): SearchResponse {
+    const sortedSearchResult = JSON.parse(json.stringify(inputSearchResponse));
+    sortedSearchResult.items = sortedSearchResult.items.sort((a, b)=> {
+      a.[sortSettings.sortByParameter]-b.[sortSettings.sortByParameter]
+    })
   }
 
 }

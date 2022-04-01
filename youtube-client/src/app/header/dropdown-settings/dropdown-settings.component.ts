@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SortSettings } from '../../models/sort-settings.model';
 
 @Component({
@@ -9,16 +9,17 @@ import { SortSettings } from '../../models/sort-settings.model';
 export class DropdownSettingsComponent implements OnInit {
 
   sortSettings: SortSettings = {
-  sortByParameter: 'date',
+  sortByParameter: 'snippet.publishedAt',
   sortByIncreaseParameter: 'increase',
   sortString: ''
   }
 
+  @Output() changeSortSettings = new EventEmitter<SortSettings>();
   @Input() toggleSettings?: string;
 
   // constructor() { }
 
   ngOnInit(): void {
-    console.log('temporally');
+    this.changeSortSettings.emit(this.sortSettings);
   }
 }

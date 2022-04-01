@@ -12,7 +12,7 @@
         </div>
       <p class="badge">{{item.snippet.title | uppercase}}</p>
       <button [class.selected]="item === selectedItem" type="button" (click)="onSelect(item)">more...</button>
-      <div class="item-bottom-line"></div>
+      <div class="item-bottom-line" [ngStyle]="{'background-color':  getColorPublicationDate(item.snippet.publishedAt)}"></div>
     </li>
   </ul>
 </div>

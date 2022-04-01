@@ -14,7 +14,7 @@ export class HeaderSearchComponent implements OnInit {
   @Output() toggle = new EventEmitter<string>();
   @Output() searchResponse = new EventEmitter<SearchResponse>();
 
-  name = 'What are you want to find out?';
+  name = '';
 
   settings: string = 'off';
 

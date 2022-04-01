@@ -4,5 +4,5 @@
   <app-header-login></app-header-login>
 </div>
 </header>
-<app-dropdown-settings [toggleSettings] = "toggleSettings"></app-dropdown-settings>
+<app-dropdown-settings [toggleSettings] = "toggleSettings" (changeSortSettings)="changeSortSettings($event)"></app-dropdown-settings>
 <app-search [searchResponse]="searchResponse"></app-search>
