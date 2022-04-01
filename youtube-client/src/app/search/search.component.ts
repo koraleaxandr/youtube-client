@@ -8,11 +8,16 @@ import { SearchResponse } from '../models/search-response.model';
 })
 export class SearchComponent implements OnInit {
 
-  @Input() searchResponse?: SearchResponse | null;
+  @Input() searchResponse?: SearchResponse | undefined;
 
   // constructor() { }
 
   ngOnInit(): void {
     console.log('search.component');
   }
+
+  changeSearchResult() {
+    this.searchResponse = undefined;
+  }
+
 }

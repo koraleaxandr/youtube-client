@@ -1,9 +1,9 @@
 <div class="dropdown-settings-container" [class.active]="toggleSettings === 'on'">
 <div class="search-settings-container">
   Sorting by:
-  <button [class.selected]="sortSettings.sortByParameter === 'snippet.publishedAt'" (click)="sortSettings.sortByParameter = 'snippet.publishedAt'">date</button>
-  <button [class.selected]="sortSettings.sortByParameter === 'statistics.viewCount'" (click)="sortSettings.sortByParameter = 'statistics.viewCount'">count of views</button>
-  <button [class.selected]="sortSettings.sortByParameter === 'string'" (click)="sortSettings.sortByParameter = 'string'">by word or sentence</button>
+  <button [class.selected]="sortSettings.sortByParameter === 'snippet.publishedAt'" (click)="sortSettings.sortByParameter = 'snippet.publishedAt'" (click)="changedSortSettings()">date</button>
+  <button [class.selected]="sortSettings.sortByParameter === 'statistics.viewCount'" (click)="sortSettings.sortByParameter = 'statistics.viewCount'" (click)="changedSortSettings()">count of views</button>
+  <button [class.selected]="sortSettings.sortByParameter === 'string'" (click)="sortSettings.sortByParameter = 'string'" (click)="changedSortSettings()">by word or sentence</button>
   <input type="text" [(ngModel)]="sortSettings.sortString" style="border: transparent">
 </div>
 </div>

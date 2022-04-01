@@ -31,8 +31,8 @@ export class SearchResultsComponent implements OnInit {
     const publicationDate = new Date(publishedAt);
     const getDateYear = (date: Date): number => Number(date.getUTCFullYear());
     const getDateMonth = (date: Date): number => Number(date.getUTCMonth() + 1);
-    const getDateDay = (date: Date): number => Number(today.getUTCDate());
-    if (getDateYear(today) > getDateYear(publicationDate)) {
+    const getDateDay = (date: Date): number => Number(date.getUTCDate());
+    if (getDateYear(today)-3 > getDateYear(publicationDate)) {
       color = 'red';
       return color;
     } else if (((getDateMonth(today) - getDateMonth(publicationDate))>= 6) && (getDateDay(today)> getDateDay(publicationDate))) {

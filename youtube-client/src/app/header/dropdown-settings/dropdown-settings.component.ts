@@ -22,4 +22,10 @@ export class DropdownSettingsComponent implements OnInit {
   ngOnInit(): void {
     this.changeSortSettings.emit(this.sortSettings);
   }
+
+  changedSortSettings() {
+    this.sortSettings.sortByIncreaseParameter = this.sortSettings.sortByIncreaseParameter==='increase'? 'decrease': 'increase';
+    console.log(JSON.stringify(this.sortSettings))
+    this.changeSortSettings.emit(this.sortSettings)
+  }
 }
