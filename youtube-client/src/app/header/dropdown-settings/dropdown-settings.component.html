@@ -4,7 +4,7 @@
   <button [class.selected]="sortSettings.sortByParameter === 'snippet.publishedAt'" (click)="sortSettings.sortByParameter = 'snippet.publishedAt'" (click)="changedSortSettings()">date</button>
   <button [class.selected]="sortSettings.sortByParameter === 'statistics.viewCount'" (click)="sortSettings.sortByParameter = 'statistics.viewCount'" (click)="changedSortSettings()">count of views</button>
   <button [class.selected]="sortSettings.sortByParameter === 'string'" (click)="sortSettings.sortByParameter = 'string'" (click)="changedSortSettings()">by word or sentence</button>
-  <input type="text" [(ngModel)]="sortSettings.sortString" style="border: transparent">
+  <input type="text" [(ngModel)]="sortSettings.sortString" style="border: transparent" (keyup)="changedSortSettings()" (keyup)="sortSettings.sortByParameter = 'string'">
 </div>
 </div>
 <div class="search-settings-container-pushing" [class.active]="toggleSettings === 'on'"></div>
