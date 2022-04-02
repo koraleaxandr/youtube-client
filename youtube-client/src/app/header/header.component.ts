@@ -2,16 +2,16 @@ import {
   Component,
   EventEmitter,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 import {
-  SortSettings
+  SortSettings,
 } from '../models/sort-settings.model';
 import {
-  SearchResponse
+  SearchResponse,
 } from '../models/search-response.model';
 import {
-  Item
+  Item,
 } from '../models/search-item.model';
 
 @Component({
@@ -23,10 +23,13 @@ export class HeaderComponent implements OnInit {
   sortSettings: SortSettings = {
     sortByParameter: 'snippet.publishedAt',
     sortByIncreaseParameter: 'increase',
-    sortString: ''
-  }
+    sortString: '',
+  };
+
   searchResponse: SearchResponse | null = null;
+
   sortedSearchResult: SearchResponse | undefined = undefined;
+
   toggleSettings: string = 'off';
 
   @Output() changeSortedSearchResult = new EventEmitter();
@@ -44,7 +47,7 @@ export class HeaderComponent implements OnInit {
     this.searchResponse = data;
     if (this.searchResponse) {
       this.sortedSearchResult = await JSON.parse(JSON.stringify(this.searchResponse));
-      await this.sortSearchResponse(this.searchResponse)
+      await this.sortSearchResponse(this.searchResponse);
       this.changeSortedSearchResult.emit();
     }
   }
@@ -52,10 +55,10 @@ export class HeaderComponent implements OnInit {
   async changeSortSettings(cangedSortSettings: SortSettings): Promise < void > {
     this.sortSettings = cangedSortSettings;
     if (this.searchResponse) {
-      this.sortedSearchResult = !this.sortSettings.sortString? await JSON.parse(JSON.stringify(this.searchResponse)):this.sortedSearchResult;
-      await this.sortSearchResponse(this.searchResponse)
+      this.sortedSearchResult = !this.sortSettings.sortString ? await JSON.parse(JSON.stringify(this.searchResponse)) : this.sortedSearchResult;
+      await this.sortSearchResponse(this.searchResponse);
       this.changeSortedSearchResult.emit();
-      console.log('changes header')
+      console.log('changes header');
     }
   }
 
@@ -94,16 +97,11 @@ export class HeaderComponent implements OnInit {
         if (this.sortedSearchResult) {
           if (this.sortSettings.sortString) {
             const sortString: string = this.sortSettings.sortString.toLowerCase();
-            console.log(sortString);
-            this.sortedSearchResult.items = this.sortedSearchResult.items.filter((element) => {
-              return JSON.stringify(element.snippet).toString().toLowerCase().includes(sortString);
-              //console.log(JSON.stringify(element.snippet.description).toString().toLowerCase())
-            });
-            console.log(this.sortedSearchResult.items.length)
+            this.sortedSearchResult.items = this.sortedSearchResult.items.filter((element) => (JSON.stringify(element.snippet).toString().toLowerCase().includes(sortString)));
+            console.log(this.sortedSearchResult.items.length);
           }
         }
       }
     }
   }
-
 }

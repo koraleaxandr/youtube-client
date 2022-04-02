@@ -1,5 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SearchResponse } from '../models/search-response.model';
+import {
+  Component,
+  OnInit,
+  Input,
+} from '@angular/core';
+import {
+  SearchResponse,
+} from '../models/search-response.model';
 
 @Component({
   selector: 'app-search',
@@ -7,8 +13,7 @@ import { SearchResponse } from '../models/search-response.model';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-
-  @Input() searchResponse?: SearchResponse | undefined;
+  @Input() searchResponse ? : SearchResponse | undefined;
 
   // constructor() { }
 
@@ -19,5 +24,4 @@ export class SearchComponent implements OnInit {
   changeSearchResult() {
     this.searchResponse = undefined;
   }
-
 }

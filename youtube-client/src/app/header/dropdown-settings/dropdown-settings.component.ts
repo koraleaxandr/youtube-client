@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component, OnInit, Input, Output, EventEmitter,
+} from '@angular/core';
 import { SortSettings } from '../../models/sort-settings.model';
 
 @Component({
@@ -7,14 +9,14 @@ import { SortSettings } from '../../models/sort-settings.model';
   styleUrls: ['./dropdown-settings.component.scss'],
 })
 export class DropdownSettingsComponent implements OnInit {
-
   sortSettings: SortSettings = {
-  sortByParameter: 'snippet.publishedAt',
-  sortByIncreaseParameter: 'increase',
-  sortString: ''
-  }
+    sortByParameter: 'snippet.publishedAt',
+    sortByIncreaseParameter: 'increase',
+    sortString: '',
+  };
 
   @Output() changeSortSettings = new EventEmitter<SortSettings>();
+
   @Input() toggleSettings?: string;
 
   // constructor() { }
@@ -24,8 +26,8 @@ export class DropdownSettingsComponent implements OnInit {
   }
 
   changedSortSettings() {
-    this.sortSettings.sortByIncreaseParameter = this.sortSettings.sortByIncreaseParameter==='increase'? 'decrease': 'increase';
-    console.log(JSON.stringify(this.sortSettings))
-    this.changeSortSettings.emit(this.sortSettings)
+    this.sortSettings.sortByIncreaseParameter = this.sortSettings.sortByIncreaseParameter === 'increase' ? 'decrease' : 'increase';
+    console.log(JSON.stringify(this.sortSettings));
+    this.changeSortSettings.emit(this.sortSettings);
   }
 }

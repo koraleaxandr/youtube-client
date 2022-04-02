@@ -2,7 +2,6 @@ import {
   Component, OnInit, Output, EventEmitter,
 } from '@angular/core';
 import { SearchResponse } from '../../models/search-response.model';
-import { SortSettings } from '../../models/sort-settings.model';
 
 @Component({
   selector: 'app-header-search',
@@ -12,6 +11,7 @@ import { SortSettings } from '../../models/sort-settings.model';
 
 export class HeaderSearchComponent implements OnInit {
   @Output() toggle = new EventEmitter<string>();
+
   @Output() searchResponse = new EventEmitter<SearchResponse>();
 
   name = '';
