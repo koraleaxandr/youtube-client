@@ -1,7 +1,7 @@
 <div *ngIf="selectedItem">
 
   <h2>SELECTED VIDEO:{{selectedItem.snippet.title}} </h2>
-  <div>id: {{selectedItem.id}}</div>
+  <div>id: {{selectedItem.id}}{{selectedItem.snippet.publishedAt}}</div>
   <div>
     <label for="item-name">Channel: </label>
     <input id="item-name" [(ngModel)]="selectedItem.snippet.channelTitle" placeholder="channelTitle">
