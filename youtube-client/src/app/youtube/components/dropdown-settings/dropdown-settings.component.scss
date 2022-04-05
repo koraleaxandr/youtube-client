@@ -56,3 +56,23 @@
   border-color: transparent !important;
   color: #333333;
 }
+.sort-input-container {
+  position: relative;
+  .mat-icon-button {
+    line-height: 20px;
+    background-color: #fffdfd;
+    border-radius: 0px;
+  }
+.clear-button{
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  right: 0;
+  .span {
+  line-height: 20px;
+  top: -10px;
+      vertical-align: top;
+}
+}
+
+}

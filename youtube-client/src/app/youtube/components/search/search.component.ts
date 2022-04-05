@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {
   SearchResponse,
-} from '../models/search-response.model';
+} from '../../models/search-response.model';
 
 @Component({
   selector: 'app-search',

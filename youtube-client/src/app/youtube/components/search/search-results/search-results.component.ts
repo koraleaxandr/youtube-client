@@ -5,10 +5,10 @@ import {
 } from '@angular/core';
 import {
   Item,
-} from '../../models/search-item.model';
+} from '../../../models/search-item.model';
 import {
   SearchResponse,
-} from '../../models/search-response.model';
+} from '../../../models/search-response.model';
 
 @Component({
   selector: 'app-search-results',

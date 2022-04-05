@@ -6,13 +6,13 @@ import {
 } from '@angular/core';
 import {
   SortSettings,
-} from '../models/sort-settings.model';
+} from '../../../youtube/models/sort-settings.model';
 import {
   SearchResponse,
-} from '../models/search-response.model';
+} from '../../../youtube/models/search-response.model';
 import {
   Item,
-} from '../models/search-item.model';
+} from '../../../youtube/models/search-item.model';
 
 @Component({
   selector: 'app-header',

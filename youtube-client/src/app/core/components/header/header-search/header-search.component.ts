@@ -1,7 +1,7 @@
 import {
   Component, OnInit, Output, EventEmitter,
 } from '@angular/core';
-import { SearchResponse } from '../../models/search-response.model';
+import { SearchResponse } from '../../../../youtube/models/search-response.model';
 
 @Component({
   selector: 'app-header-search',
