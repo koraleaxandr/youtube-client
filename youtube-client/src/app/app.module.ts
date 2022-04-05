@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -15,6 +15,7 @@ import { SearchItemComponent } from './search/search-item/search-item.component'
 import { HeaderSearchComponent } from './header/header-search/header-search.component';
 import { HeaderLoginComponent } from './header/header-login/header-login.component';
 import { DropdownSettingsComponent } from './header/dropdown-settings/dropdown-settings.component';
+import { AngularMaterialModule } from './angular-material.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { DropdownSettingsComponent } from './header/dropdown-settings/dropdown-s
     HeaderSearchComponent,
     HeaderLoginComponent,
     DropdownSettingsComponent,
-
+    AngularMaterialModule,
   ],
   imports: [
     BrowserModule,
@@ -40,5 +41,6 @@ import { DropdownSettingsComponent } from './header/dropdown-settings/dropdown-s
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
