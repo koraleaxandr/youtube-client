@@ -19,6 +19,7 @@ import { AngularMaterialModule } from './shared/components/angular-material.modu
 import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
 import { UserRegisterComponent } from './auth/pages/user-register/user-register.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NotFoundComponent } from './core/components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     DropdownSettingsComponent,
     LoginPageComponent,
     UserRegisterComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
