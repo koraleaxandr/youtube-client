@@ -22,7 +22,7 @@ body, input[type="text"], button {
   font-family: Cambria, Georgia, serif;
 }
 button {
-  background-color: #eee;
+  background-color: #2F80ED;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -56,6 +56,9 @@ button:disabled {
 :root {
   font-size: 12px;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
