@@ -6,15 +6,15 @@
     <form class="example-form">
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="First Name">
+          <input type="name" matInput [formControl]="nameFormControl" [errorStateMatcher]="matcher" placeholder="First Name"[(ngModel)]="userSettings.userName" name="userName">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Last Name">
+          <input matInput [formControl]="nameFormControl" placeholder="Last Name"name="userLastName">
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>mail</mat-label>
           <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-            placeholder="Ex. pat@example.com">
+            placeholder="Ex. pat@example.com" name="userMail">
           <mat-hint></mat-hint>
           <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Please enter a valid email address
@@ -24,12 +24,12 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Password">
+          <input matInput [formControl]="passwordFormControl" placeholder="Password"name="userPassword">
         </mat-form-field>
       </mat-card-content>
       <div class="buttons-container">
         <a class="btn-block" routerLink="/" routerLinkActive="active">Log in</a>
-        <button class="btn-block">Registration </button>
+        <button class="btn-block"(click)="getRegistry()">Registration </button>
       </div>
     </form>
   </mat-card>

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { UserSettings } from '../../models/user-settings.model';
+import { UserAuthServiceService } from '../../services/user-auth-service.service';
 
 @Component({
   selector: 'app-login-page',
@@ -11,15 +12,22 @@ export class LoginPageComponent implements OnInit {
     userName: '',
     userPassword: '',
     userAuthToken: '',
+    userMail: '',
+    userLastName: ''
   }
+  authServise: UserAuthServiceService;
 
   //@Output() userSettings
 
-  constructor() { }
+  constructor(authServise: UserAuthServiceService) { 
+    this.authServise = authServise;
+  }
 
   ngOnInit(): void {
   }
 
-
+getUserSettings() {
+  this.authServise.autoriseUser(this.userSettings);
+}
 
 }

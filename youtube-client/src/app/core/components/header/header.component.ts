@@ -13,6 +13,7 @@ import {
 import {
   Item,
 } from '../../../youtube/models/search-item.model';
+import { UserAuthServiceService } from '../../../auth/services/user-auth-service.service';
 
 @Component({
   selector: 'app-header',
@@ -33,7 +34,10 @@ export class HeaderComponent implements OnInit {
   toggleSettings: string = 'off';
 
   @Output() changeSortedSearchResult = new EventEmitter();
-  // constructor() { }
+  authServise: UserAuthServiceService;
+   constructor(authServise: UserAuthServiceService) {
+    this.authServise = authServise;
+   }
 
   ngOnInit(): void {
     console.log('header.component');

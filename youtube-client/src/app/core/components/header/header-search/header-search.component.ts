@@ -10,12 +10,11 @@ import { SearchResponse } from '../../../../youtube/models/search-response.model
 })
 
 export class HeaderSearchComponent implements OnInit {
-  @Output() toggle = new EventEmitter<string>();
 
+  @Output() toggle = new EventEmitter<string>();
   @Output() searchResponse = new EventEmitter<SearchResponse>();
 
   name = '';
-
   settings: string = 'off';
 
   // constructor() { }
