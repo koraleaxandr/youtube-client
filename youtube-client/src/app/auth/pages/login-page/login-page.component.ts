@@ -1,11 +1,20 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
-import { UserSettings } from '../../models/user-settings.model';
-import { UserAuthServiceService } from '../../services/user-auth-service.service';
+import {
+  Component,
+  OnInit,
+  // Output,
+  // Input
+} from '@angular/core';
+import {
+  UserSettings,
+} from '../../models/user-settings.model';
+import {
+  UserAuthServiceService,
+} from '../../services/user-auth-service.service';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
   userSettings: UserSettings = {
@@ -13,21 +22,24 @@ export class LoginPageComponent implements OnInit {
     userPassword: '',
     userAuthToken: '',
     userMail: '',
-    userLastName: ''
+    userLastName: '',
+  };
+
+  authService: UserAuthServiceService;
+
+  // @Output() userSettings
+
+  constructor(authService: UserAuthServiceService) {
+    this.authService = authService;
   }
-  authServise: UserAuthServiceService;
 
-  //@Output() userSettings
-
-  constructor(authServise: UserAuthServiceService) { 
-    this.authServise = authServise;
-  }
-
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {
+    const savedUser: UserSettings | null = this.authService.getSavedLocalUser();
+    this.userSettings = savedUser || this.userSettings;
   }
 
-getUserSettings() {
-  this.authServise.autoriseUser(this.userSettings);
-}
-
+  getUserSettings() {
+    this.authService.authorizeUser(this.userSettings);
+  }
 }

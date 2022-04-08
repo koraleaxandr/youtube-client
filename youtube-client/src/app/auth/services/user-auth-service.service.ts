@@ -1,56 +1,61 @@
 import {
   EventEmitter,
-  Injectable, Output, Input
+  Injectable,
+  Output,
+  Input,
 } from '@angular/core';
 import {
-  UserSettings
+  UserSettings,
 } from '../models/user-settings.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 
 export class UserAuthServiceService {
   public isAuthorized: boolean = false;
 
   @Input()
-  userForRegistration!: UserSettings;
+    userForRegistration!: UserSettings;
 
-  @Output() getRegistration = new EventEmitter<UserSettings>();
+  @Output() getRegistration = new EventEmitter < UserSettings >();
 
-  //constructor() { }
+  // constructor() { }
   getSavedLocalUser(): UserSettings | null {
     if (localStorage.getItem('savedLocalUser')) {
       const savedLocalUser: UserSettings = JSON.parse(localStorage.getItem('savedUser') as string) as UserSettings;
       return savedLocalUser;
-    } else return null;
+    } return null;
   }
 
   saveLocalUser(user: UserSettings) {
-    localStorage.setItem('savedUser', JSON.stringify(user))
+    localStorage.setItem('savedUser', JSON.stringify(user));
   }
 
-  registryUser(userForRegistration: UserSettings) {
-    userForRegistration.userAuthToken = this.getUserAuthToken(userForRegistration);
-    this.saveLocalUser(userForRegistration);
+  registryUser(user: UserSettings) {
+    const newUser: UserSettings = user;
+    newUser.userAuthToken = this.getUserAuthToken(user);
+    this.saveLocalUser(newUser);
     this.isAuthorized = true;
-    console.log(JSON.stringify(userForRegistration))
+    console.log(JSON.stringify(newUser));
   }
 
-  getUserAuthToken(user: UserSettings): string  {
-    user.userAuthToken = 'balaBlaUserToken12345678';
+  getUserAuthToken(user: UserSettings): string {
+    const newUser: UserSettings = user;
+    newUser.userAuthToken = 'balaBlaUserToken12345678';
     const token = 'balaBlaUserToken12345678';
     return token;
   }
 
-  autoriseUser(user: UserSettings) {
+  authorizeUser(user: UserSettings) {
+    let newUser: UserSettings = user;
     const localSavedUser: UserSettings | null = this.getSavedLocalUser();
     if (localSavedUser) {
-      if (user.userName === localSavedUser.userName) {
-        user = localSavedUser;
+      if (newUser.userName === localSavedUser.userName) {
+        newUser = localSavedUser;
         this.isAuthorized = true;
       } else {
-        this.getRegistration.emit(user);
+        this.getRegistration.emit(newUser);
       }
     }
   }

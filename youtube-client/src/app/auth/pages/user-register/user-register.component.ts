@@ -1,9 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
-import { UserSettings } from '../../models/user-settings.model';
-import { UserAuthServiceService } from '../../services/user-auth-service.service';
-
+/* eslint-disable max-classes-per-file */
+import {
+  Component,
+  Input,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
+import {
+  ErrorStateMatcher,
+} from '@angular/material/core';
+import {
+  UserSettings,
+} from '../../models/user-settings.model';
+import {
+  UserAuthServiceService,
+} from '../../services/user-auth-service.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -16,35 +31,37 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-user-register',
   templateUrl: './user-register.component.html',
-  styleUrls: ['./user-register.component.scss']
+  styleUrls: ['./user-register.component.scss'],
 })
-export class UserRegisterComponent implements OnInit {
-
+export class UserRegisterComponent {
   userSettings: UserSettings = {
     userName: '',
     userPassword: '',
     userAuthToken: '',
     userMail: '',
-    userLastName: ''
+    userLastName: '',
+  };
+
+  @Input() userForRegistration ? : UserSettings;
+
+  authService: UserAuthServiceService;
+
+  constructor(authService: UserAuthServiceService) {
+    this.authService = authService;
   }
 
-  @Input() userForRegistration?: UserSettings;
-
-  authServise: UserAuthServiceService;
-
-  constructor(authServise: UserAuthServiceService) {
-    this.authServise = authServise;
-   }
-
-  ngOnInit(): void {
-  }
-
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  nameFormControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
-  passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  registryFormGroup: FormGroup = new FormGroup({
+    emailFormControl: new FormControl('', [Validators.required, Validators.email]),
+    nameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(8)]),
+  });
 
   matcher = new MyErrorStateMatcher();
-  getRegistry(){
-    this.authServise.registryUser(this.userSettings);
+
+  getRegistry() {
+    console.log(this.registryFormGroup.status);
+    if (this.registryFormGroup.status === 'VALID') {
+      this.authService.registryUser(this.userSettings);
+    }
   }
 }

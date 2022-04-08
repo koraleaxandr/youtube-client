@@ -3,14 +3,13 @@
   "ignorePatterns": [
     "projects/**/*"
   ],
-  "overrides": [
-    {
+  "overrides": [{
       "files": [
         "*.ts"
       ],
       "parserOptions": {
         "project": [
-          "tsconfig.json"
+          "youtube-client/tsconfig.json"
         ],
         "createDefaultProgram": true
       },
@@ -37,12 +36,12 @@
             "style": "kebab-case"
           }
         ],
-         "import/prefer-default-export": "off",
-         "no-empty-lifecycle-method": "off",
-         "class-methods-use-this":"off",
-         "no-console":"off",
-         "linebreak-style":"off",
-         "max-len":"off"
+        "import/prefer-default-export": "off",
+        "no-empty-lifecycle-method": "off",
+        "class-methods-use-this": "off",
+        "no-console": "off",
+        "linebreak-style": "off",
+        "max-len": "off"
       }
     },
     {
@@ -52,8 +51,7 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {
-      }
+      "rules": {}
     }
   ]
 }
