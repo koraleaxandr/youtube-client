@@ -2,38 +2,33 @@
 import {
   Component,
   Input,
+  OnInit,
 } from '@angular/core';
 import {
   FormControl,
   FormGroup,
-  FormGroupDirective,
-  NgForm,
   Validators,
 } from '@angular/forms';
+
 import {
-  ErrorStateMatcher,
-} from '@angular/material/core';
+  Router,
+} from '@angular/router';
 import {
   UserSettings,
 } from '../../models/user-settings.model';
 import {
   UserAuthServiceService,
 } from '../../services/user-auth-service.service';
-
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+import {
+  MyErrorStateMatcher,
+} from '../../services/error-state.service';
 
 @Component({
   selector: 'app-user-register',
   templateUrl: './user-register.component.html',
   styleUrls: ['./user-register.component.scss'],
 })
-export class UserRegisterComponent {
+export class UserRegisterComponent implements OnInit {
   userSettings: UserSettings = {
     userName: '',
     userPassword: '',
@@ -46,8 +41,19 @@ export class UserRegisterComponent {
 
   authService: UserAuthServiceService;
 
-  constructor(authService: UserAuthServiceService) {
+  constructor(
+    authService: UserAuthServiceService,
+    // TODO private route: ActivatedRoute,
+    private router: Router,
+  ) {
     this.authService = authService;
+  }
+
+  ngOnInit(): void {
+    this.userSettings = this.authService.userSettings;
+    console.log(this.userSettings);
+    this.registryFormGroup.controls['nameFormControl'].setValue(this.userSettings.userName);
+    this.registryFormGroup.controls['passwordFormControl'].setValue(this.userSettings.userPassword);
   }
 
   registryFormGroup: FormGroup = new FormGroup({
@@ -62,6 +68,7 @@ export class UserRegisterComponent {
     console.log(this.registryFormGroup.status);
     if (this.registryFormGroup.status === 'VALID') {
       this.authService.registryUser(this.userSettings);
+      this.router.navigate(['main']);
     }
   }
 }

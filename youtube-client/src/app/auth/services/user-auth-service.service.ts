@@ -13,6 +13,14 @@ import {
 })
 
 export class UserAuthServiceService {
+  public userSettings: UserSettings = {
+    userName: '',
+    userPassword: '',
+    userAuthToken: '',
+    userMail: '',
+    userLastName: '',
+  };
+
   public isAuthorized: boolean = false;
 
   @Input()
@@ -48,6 +56,7 @@ export class UserAuthServiceService {
   }
 
   authorizeUser(user: UserSettings) {
+    this.userSettings = user;
     let newUser: UserSettings = user;
     const localSavedUser: UserSettings | null = this.getSavedLocalUser();
     if (localSavedUser) {
