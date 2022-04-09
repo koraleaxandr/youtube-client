@@ -17,7 +17,7 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Last Name" name="userLastName">
+          <input matInput placeholder="Last Name" name="userLastName" [ngModel] = "userSettings.userLastName" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>mail</mat-label>
@@ -45,9 +45,7 @@
       </mat-card-content>
       <div class="buttons-container">
         <a class="btn-block" routerLink="/" routerLinkActive="active">Log in</a>
-        <button class="btn-block" (click)="getRegistry()">
-          <!-- <a *ngIf="registryFormGroup.valid" class="btn-block"  (click)="getRegistry()" routerLink="/"
-            routerLinkActive="active"></a> -->
+        <button type="button" class="btn-block" (click)="getRegistry()">
           Registration
         </button>
       </div>

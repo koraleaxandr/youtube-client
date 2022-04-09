@@ -1,7 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import {
   Component,
-  Input,
   OnInit,
 } from '@angular/core';
 import {
@@ -37,8 +36,6 @@ export class UserRegisterComponent implements OnInit {
     userLastName: '',
   };
 
-  @Input() userForRegistration ? : UserSettings;
-
   authService: UserAuthServiceService;
 
   constructor(
@@ -64,8 +61,16 @@ export class UserRegisterComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
+  getUserSettings() {
+    this.userSettings.userName = this.registryFormGroup.controls['nameFormControl'].value;
+    this.userSettings.userPassword = this.registryFormGroup.controls['passwordFormControl'].value;
+    this.userSettings.userMail = this.registryFormGroup.controls['emailFormControl'].value;
+  }
+
   getRegistry() {
+    this.getUserSettings();
     console.log(this.registryFormGroup.status);
+    console.log(this.userSettings);
     if (this.registryFormGroup.status === 'VALID') {
       this.authService.registryUser(this.userSettings);
       this.router.navigate(['main']);

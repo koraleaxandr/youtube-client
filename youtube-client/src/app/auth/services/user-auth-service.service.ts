@@ -1,8 +1,5 @@
 import {
-  EventEmitter,
   Injectable,
-  Output,
-  Input,
 } from '@angular/core';
 import {
   UserSettings,
@@ -23,14 +20,13 @@ export class UserAuthServiceService {
 
   public isAuthorized: boolean = false;
 
-  @Input()
-    userForRegistration!: UserSettings;
-
-  @Output() getRegistration = new EventEmitter < UserSettings >();
-
   // constructor() { }
+  getIsAuthorizedStatus(): void {
+    this.isAuthorized = localStorage.getItem('isAuthorized') ? localStorage.getItem('isAuthorized') as unknown as boolean : false;
+  }
+
   getSavedLocalUser(): UserSettings | null {
-    if (localStorage.getItem('savedLocalUser')) {
+    if (localStorage.getItem('savedUser')) {
       const savedLocalUser: UserSettings = JSON.parse(localStorage.getItem('savedUser') as string) as UserSettings;
       return savedLocalUser;
     } return null;
@@ -44,8 +40,8 @@ export class UserAuthServiceService {
     const newUser: UserSettings = user;
     newUser.userAuthToken = this.getUserAuthToken(user);
     this.saveLocalUser(newUser);
-    this.isAuthorized = true;
     console.log(JSON.stringify(newUser));
+    this.authorizeUser(newUser);
   }
 
   getUserAuthToken(user: UserSettings): string {
@@ -63,8 +59,7 @@ export class UserAuthServiceService {
       if (newUser.userName === localSavedUser.userName) {
         newUser = localSavedUser;
         this.isAuthorized = true;
-      } else {
-        this.getRegistration.emit(newUser);
+        localStorage.setItem('isAuthorized', 'true');
       }
     }
   }

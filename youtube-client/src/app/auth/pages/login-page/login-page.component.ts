@@ -47,30 +47,47 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.isAuthorized = false;
+    localStorage.setItem('isAuthorized', 'false');
     const savedUser: UserSettings | null = this.authService.getSavedLocalUser();
-    this.userSettings.userName = savedUser?.userName || '';
+    console.log(JSON.stringify(savedUser));
+    this.userSettings.userName = savedUser?.userName as string;
     this.authorizeForm.controls['nameFormControl'].setValue(this.userSettings.userName);
   }
 
-  passwordMatchingValidator(): boolean {
+  private passwordMatchingValidator(): boolean {
     if (this.authorizeForm.controls['passwordFormControl'].value === this.authService.getSavedLocalUser()?.userPassword as string) {
+      console.log('true');
       return true;
     }
+    console.log('not math password');
     return false;
   }
 
-  authorizeForm: FormGroup = new FormGroup({
-    emailFormControl: new FormControl('', [Validators.required, Validators.email]),
+  public authorizeForm: FormGroup = new FormGroup({
     nameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
     passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 
-  getUserSettings() {
-    console.log(this.userSettings);
-    // if (this.authorizeForm.status === 'VALID' && this.passwordMatchingValidator()) {
-    //   this.authService.registryUser(this.userSettings);
-    //   this.router.navigate(['main']);
-    // }
-    this.authService.authorizeUser(this.userSettings);
+  public getUserSettings() {
+    this.userSettings.userName = this.authorizeForm.controls['nameFormControl'].value;
+    this.userSettings.userPassword = this.authorizeForm.controls['passwordFormControl'].value;
+    this.authorizeUserSettings();
+  }
+
+  private authorizeUserSettings() {
+    console.log(JSON.stringify(this.userSettings));
+    if (this.userSettings.userName === this.authService.getSavedLocalUser()?.userName) {
+      const matchPassword: boolean = this.passwordMatchingValidator();
+      console.log(this.authorizeForm.status);
+      if (this.authorizeForm.status === 'VALID' && matchPassword) {
+        this.authService.authorizeUser(this.userSettings);
+        this.router.navigate(['main']);
+      } else this.authorizeForm.controls['passwordFormControl'].setValue('');
+    } else {
+      this.authService.userSettings = this.userSettings;
+      this.authorizeForm.controls['nameFormControl'].setValue('');
+      this.authorizeForm.controls['passwordFormControl'].setValue('');
+    }
   }
 }

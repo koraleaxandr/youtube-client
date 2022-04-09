@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  Router,
+} from '@angular/router';
+import {
+  UserAuthServiceService,
+} from '../../../../auth/services/user-auth-service.service';
 
 @Component({
   selector: 'app-header-login',
@@ -9,9 +15,16 @@ export class HeaderLoginComponent implements OnInit {
   name: string = 'Your Name';
 
   userLogoUrl: string = '../../../assets/svg/Login.svg';
-  // constructor() { }
+
+  authService: UserAuthServiceService;
+
+  constructor(authService: UserAuthServiceService, private router: Router) {
+    this.authService = authService;
+  }
 
   ngOnInit(): void {
-    console.log('temporally');
+    if (this.authService.isAuthorized) {
+      this.name = this.authService.userSettings.userName;
+    } else this.router.navigate(['login']);
   }
 }
