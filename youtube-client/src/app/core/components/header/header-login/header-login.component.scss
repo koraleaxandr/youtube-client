@@ -6,17 +6,16 @@
   margin: 0 15px;
   justify-self: flex-end;
   font-family: Roboto;
-  font-size: 12px;
+  font-size: 16px;
 }
 
-.user-logo
- {
-   height: 24px;
-   width: 24px;
-   background-image: url(../../../../../assets/svg/Login.svg);
-   background-size: contain;
-   background-repeat: no-repeat;
-   margin: 0 10px;
-   box-shadow: none;
-   cursor: pointer;
- }
+.user-logo {
+  height: 24px;
+  width: 24px;
+  background-image: url(../../../../../assets/svg/Login.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0 10px;
+  box-shadow: none;
+  cursor: pointer;
+}

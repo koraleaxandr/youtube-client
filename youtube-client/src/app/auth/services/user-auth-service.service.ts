@@ -1,6 +1,7 @@
 import {
   Injectable,
 } from '@angular/core';
+import { Subject } from 'rxjs';
 import {
   UserSettings,
 } from '../models/user-settings.model';
@@ -18,11 +19,16 @@ export class UserAuthServiceService {
     userLastName: '',
   };
 
-  public isAuthorized: boolean = false;
+  public isAuthorized: string = 'false';
+
+  private changeUserSource = new Subject<string>();
+
+  changeUser$ = this.changeUserSource.asObservable();
 
   // constructor() { }
   getIsAuthorizedStatus(): void {
-    this.isAuthorized = localStorage.getItem('isAuthorized') ? localStorage.getItem('isAuthorized') as unknown as boolean : false;
+    this.isAuthorized = localStorage.getItem('isAuthorized') ? localStorage.getItem('isAuthorized') as string : 'false';
+    this.userSettings.userName = this.isAuthorized === 'true' ? this.getSavedLocalUser()?.userName as string : '';
   }
 
   getSavedLocalUser(): UserSettings | null {
@@ -58,9 +64,15 @@ export class UserAuthServiceService {
     if (localSavedUser) {
       if (newUser.userName === localSavedUser.userName) {
         newUser = localSavedUser;
-        this.isAuthorized = true;
+        this.logInOutUser('true');
         localStorage.setItem('isAuthorized', 'true');
+        this.changeUserSource.next(newUser.userName);
       }
     }
+  }
+
+  logInOutUser(status: string) {
+    localStorage.setItem('isAuthorized', status);
+    this.isAuthorized = status;
   }
 }

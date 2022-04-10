@@ -9,7 +9,7 @@ import { SearchComponent } from '../../youtube/components/search/search.componen
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: UserRegisterComponent, pathMatch: 'full' },
-  { path: 'login/register', component: UserRegisterComponent, pathMatch: 'full' },
+  { path: 'youtube-search', component: SearchComponent, pathMatch: 'full' },
   { path: 'main', component: SearchComponent, pathMatch: 'full' },
   { path: '', pathMatch: 'full', redirectTo: 'main' },
   { path: '**', component: NotFoundComponent },

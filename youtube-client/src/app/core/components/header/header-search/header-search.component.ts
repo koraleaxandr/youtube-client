@@ -1,7 +1,13 @@
 import {
   Component, OnInit, Output, EventEmitter,
 } from '@angular/core';
+import {
+  Router,
+} from '@angular/router';
 import { SearchResponse } from '../../../../youtube/models/search-response.model';
+import {
+  UserAuthServiceService,
+} from '../../../../auth/services/user-auth-service.service';
 
 @Component({
   selector: 'app-header-search',
@@ -10,14 +16,19 @@ import { SearchResponse } from '../../../../youtube/models/search-response.model
 })
 
 export class HeaderSearchComponent implements OnInit {
-
   @Output() toggle = new EventEmitter<string>();
+
   @Output() searchResponse = new EventEmitter<SearchResponse>();
 
   name = '';
+
   settings: string = 'off';
 
-  // constructor() { }
+  authService: UserAuthServiceService;
+
+  constructor(authService: UserAuthServiceService, private router: Router) {
+    this.authService = authService;
+  }
 
   ngOnInit(): void {
     console.log('temporally');
@@ -29,6 +40,7 @@ export class HeaderSearchComponent implements OnInit {
     const searchResponse: Response = await fetch(url);
     const data: SearchResponse = await searchResponse.json() as unknown as SearchResponse;
     this.searchResponse.emit(data);
+    this.router.navigate(['youtube-search']);
     return data;
   }
 

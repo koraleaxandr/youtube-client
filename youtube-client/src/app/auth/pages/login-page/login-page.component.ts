@@ -47,8 +47,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.isAuthorized = false;
-    localStorage.setItem('isAuthorized', 'false');
+    this.authService.logInOutUser('false');
     const savedUser: UserSettings | null = this.authService.getSavedLocalUser();
     console.log(JSON.stringify(savedUser));
     this.userSettings.userName = savedUser?.userName as string;
