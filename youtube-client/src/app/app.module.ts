@@ -5,9 +5,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './shared/components/app-routing.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-/* eslint-disable import/prefer-default-export */
 import { HeaderComponent } from './core/components/header/header.component';
 import { SearchComponent } from './youtube/components/search/search.component';
 import { SearchResultsComponent } from './youtube/components/search/search-results/search-results.component';
@@ -18,7 +18,6 @@ import { DropdownSettingsComponent } from './youtube/components/dropdown-setting
 import { AngularMaterialModule } from './shared/components/angular-material.module';
 import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
 import { UserRegisterComponent } from './auth/pages/user-register/user-register.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
 
 @NgModule({
@@ -45,10 +44,10 @@ import { NotFoundComponent } from './core/components/not-found/not-found.compone
     MatInputModule,
     MatIconModule,
     AngularMaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

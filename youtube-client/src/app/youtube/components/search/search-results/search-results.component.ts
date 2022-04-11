@@ -38,7 +38,7 @@ export class SearchResultsComponent implements OnInit {
   onSelect(item: Item): void {
     this.selectedItem = item;
     this.searchSortService.selectedItem = item;
-    this.router.navigate(['detailed-information']);
+    this.router.navigate(['detailed-information/', this.selectedItem.id]);
   }
 
   getColorPublicationDate(publishedAt: string): string {

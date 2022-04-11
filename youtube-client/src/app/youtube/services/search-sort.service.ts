@@ -1,5 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import {
+  Injectable,
+} from '@angular/core';
+import {
+  Subject,
+} from 'rxjs';
 import {
   SortSettings,
 } from '../models/sort-settings.model';
@@ -15,7 +19,7 @@ import {
 })
 export class SearchSortService {
   selectedItem ? : Item;
-  
+
   sortSettings: SortSettings = {
     sortByParameter: 'snippet.publishedAt',
     sortByIncreaseParameter: 'increase',
@@ -26,13 +30,13 @@ export class SearchSortService {
 
   sortedSearchResult: SearchResponse | undefined = undefined;
 
-  private changeSortedSearchResult = new Subject<SearchResponse | undefined>();
+  private changeSortedSearchResult = new Subject < SearchResponse | undefined >();
 
   changeSortedSearchResult$ = this.changeSortedSearchResult.asObservable();
 
   // constructor() { }
 
-  public async getSearchData(): Promise<void> {
+  public async getSearchData(): Promise < void > {
     const url = `https://raw.githubusercontent.com/rolling-scopes-school/tasks/aaacab024b04449e1ae31a938a6983ffb7e7549a/tasks/angular/response.json
     `;
     const searchResponse: Response = await fetch(url);
@@ -104,4 +108,9 @@ export class SearchSortService {
       }
     }
   }
+
+  // getItemForId(id: string): Item {
+  //   const detailedItem: Item = this.sortedSearchResult.items.filter((element) => (element.id === id))[0];
+  //   return detailedItem;
+  // }
 }
