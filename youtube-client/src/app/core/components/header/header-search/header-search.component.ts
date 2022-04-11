@@ -8,6 +8,7 @@ import { SearchResponse } from '../../../../youtube/models/search-response.model
 import {
   UserAuthServiceService,
 } from '../../../../auth/services/user-auth-service.service';
+import { SearchSortService } from '../../../../youtube/services/search-sort.service';
 
 @Component({
   selector: 'app-header-search',
@@ -26,22 +27,23 @@ export class HeaderSearchComponent implements OnInit {
 
   authService: UserAuthServiceService;
 
-  constructor(authService: UserAuthServiceService, private router: Router) {
+  searchSortService: SearchSortService;
+
+  constructor(authService: UserAuthServiceService, private router: Router, searchSortService: SearchSortService) {
     this.authService = authService;
+    this.searchSortService = searchSortService;
   }
 
   ngOnInit(): void {
     console.log('temporally');
   }
 
-  public async searchSubmit(): Promise<SearchResponse> {
-    const url = `https://raw.githubusercontent.com/rolling-scopes-school/tasks/aaacab024b04449e1ae31a938a6983ffb7e7549a/tasks/angular/response.json
-    `;
-    const searchResponse: Response = await fetch(url);
-    const data: SearchResponse = await searchResponse.json() as unknown as SearchResponse;
-    this.searchResponse.emit(data);
-    this.router.navigate(['youtube-search']);
-    return data;
+  public async searchSubmit(): Promise<void> {
+    if (this.authService.isAuthorized === 'true') {
+      this.searchSortService.getSearchData();
+      // this.searchResponse.emit(data);
+      this.router.navigate(['youtube-search']);
+    }
   }
 
   toggleSettings(): void {

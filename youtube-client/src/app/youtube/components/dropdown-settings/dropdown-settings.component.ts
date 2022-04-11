@@ -2,6 +2,7 @@ import {
   Component, OnInit, Input, Output, EventEmitter,
 } from '@angular/core';
 import { SortSettings } from '../../models/sort-settings.model';
+import { SearchSortService } from '../../services/search-sort.service';
 
 @Component({
   selector: 'app-dropdown-settings',
@@ -19,15 +20,21 @@ export class DropdownSettingsComponent implements OnInit {
 
   @Input() toggleSettings?: string;
 
-  // constructor() { }
+  searchSortService: SearchSortService;
+
+  constructor(searchSortService: SearchSortService) {
+    this.searchSortService = searchSortService;
+  }
 
   ngOnInit(): void {
     this.changeSortSettings.emit(this.sortSettings);
+    this.searchSortService.sortSettings = this.sortSettings;
   }
 
   changedSortSettings() {
     this.sortSettings.sortByIncreaseParameter = this.sortSettings.sortByIncreaseParameter === 'increase' ? 'decrease' : 'increase';
     console.log(JSON.stringify(this.sortSettings));
     this.changeSortSettings.emit(this.sortSettings);
+    this.searchSortService.changeSortSettings(this.sortSettings);
   }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Item } from '../../../models/search-item.model';
+import { SearchSortService } from '../../../services/search-sort.service';
 
 @Component({
   selector: 'app-search-item',
@@ -7,10 +8,15 @@ import { Item } from '../../../models/search-item.model';
   styleUrls: ['./search-item.component.scss'],
 })
 export class SearchItemComponent implements OnInit {
-  @Input() selectedItem?: Item;
-  // constructor() { }
+  selectedItem ? : Item;
+
+  searchSortService: SearchSortService;
+
+  constructor(searchSortService: SearchSortService) {
+    this.searchSortService = searchSortService;
+   }
 
   ngOnInit(): void {
-    console.log('search-item.component');
+    this.selectedItem = this.searchSortService.selectedItem;
   }
 }

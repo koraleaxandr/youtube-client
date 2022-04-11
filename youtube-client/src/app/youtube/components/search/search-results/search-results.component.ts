@@ -1,14 +1,17 @@
 import {
   Component,
   OnInit,
-  Input,
 } from '@angular/core';
+import {
+  Router,
+} from '@angular/router';
 import {
   Item,
 } from '../../../models/search-item.model';
 import {
   SearchResponse,
 } from '../../../models/search-response.model';
+import { SearchSortService } from '../../../services/search-sort.service';
 
 @Component({
   selector: 'app-search-results',
@@ -20,16 +23,22 @@ export class SearchResultsComponent implements OnInit {
 
   date = new Date().toLocaleDateString('en-en');
 
-  @Input() searchResponse ? : SearchResponse | null;
+  searchResponse: SearchResponse | undefined;
 
-  // constructor() { }
+  searchSortService: SearchSortService;
+
+  constructor(searchSortService: SearchSortService, private router: Router) {
+    this.searchSortService = searchSortService;
+  }
 
   ngOnInit(): void {
-    console.log(this.date);
+    this.searchResponse = this.searchSortService.sortedSearchResult;
   }
 
   onSelect(item: Item): void {
     this.selectedItem = item;
+    this.searchSortService.selectedItem = item;
+    this.router.navigate(['detailed-information']);
   }
 
   getColorPublicationDate(publishedAt: string): string {
@@ -45,7 +54,7 @@ export class SearchResultsComponent implements OnInit {
       color = 'red';
       return color;
     }
-    if (((getDateMonth(today) - getDateMonth(publicationDate)) == 6) && (getDateDay(today) < getDateDay(publicationDate))) {
+    if (((getDateMonth(today) - getDateMonth(publicationDate)) === 6) && (getDateDay(today) < getDateDay(publicationDate))) {
       color = 'yellow';
       return color;
     }
@@ -53,7 +62,7 @@ export class SearchResultsComponent implements OnInit {
       color = 'yellow';
       return color;
     }
-    if ((getDateMonth(today) - getDateMonth(publicationDate) == 1) && (getDateDay(today) > getDateDay(publicationDate))) {
+    if ((getDateMonth(today) - getDateMonth(publicationDate) === 1) && (getDateDay(today) > getDateDay(publicationDate))) {
       color = 'yellow';
       return color;
     }

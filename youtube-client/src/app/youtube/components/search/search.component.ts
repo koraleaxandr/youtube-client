@@ -3,6 +3,7 @@ import {
   OnInit,
   Input,
 } from '@angular/core';
+
 import {
   SearchResponse,
 } from '../../models/search-response.model';

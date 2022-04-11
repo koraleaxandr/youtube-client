@@ -5,12 +5,14 @@ import { LoginPageComponent } from '../../auth/pages/login-page/login-page.compo
 import { UserRegisterComponent } from '../../auth/pages/user-register/user-register.component';
 import { NotFoundComponent } from '../../core/components/not-found/not-found.component';
 import { SearchComponent } from '../../youtube/components/search/search.component';
+import { SearchItemComponent } from '../../youtube/components/search/search-item/search-item.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: UserRegisterComponent, pathMatch: 'full' },
   { path: 'youtube-search', component: SearchComponent, pathMatch: 'full' },
   { path: 'main', component: SearchComponent, pathMatch: 'full' },
+  { path: 'detailed-information', component: SearchItemComponent, pathMatch: 'full' },
   { path: '', pathMatch: 'full', redirectTo: 'main' },
   { path: '**', component: NotFoundComponent },
 ];

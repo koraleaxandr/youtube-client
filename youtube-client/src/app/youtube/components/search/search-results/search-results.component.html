@@ -1,7 +1,7 @@
-<div class="search-result-container" *ngIf="searchResponse">
-  <app-search-item [selectedItem]="selectedItem"></app-search-item>
+<div class="search-result-container" *ngIf="searchSortService.sortedSearchResult">
+  <!-- <app-search-item [selectedItem]="selectedItem"></app-search-item> -->
   <ul class="items">
-    <li *ngFor="let item of searchResponse.items">
+    <li *ngFor="let item of searchSortService.sortedSearchResult.items">
       <div class="list-item-thumbnail"
         [ngStyle]="{'background-image': 'url(' + item.snippet.thumbnails.medium.url + ')'}"></div>
         <div class="item-statistic-container">
