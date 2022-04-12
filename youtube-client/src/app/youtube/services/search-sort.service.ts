@@ -109,8 +109,8 @@ export class SearchSortService {
     }
   }
 
-  // getItemForId(id: string): Item {
-  //   const detailedItem: Item = this.sortedSearchResult.items.filter((element) => (element.id === id))[0];
-  //   return detailedItem;
-  // }
+  getItemForId(id: string): Item {
+    const detailedItem: Item = (this.sortedSearchResult as SearchResponse).items.filter((element) => (element.id === id))[0] as Item;
+    return detailedItem;
+  }
 }

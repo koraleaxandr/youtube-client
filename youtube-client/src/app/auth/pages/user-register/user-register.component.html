@@ -3,7 +3,7 @@
     <mat-card-header>
       <mat-card-title>Registration</mat-card-title>
     </mat-card-header>
-    <form class="example-form" [formGroup]="registryFormGroup">
+    <form class="example-form" [formGroup]="registryFormGroup" (ngSubmit)="getRegistry()">
       <mat-card-content>
         <mat-form-field class="example-full-width">
           <input type="name" matInput formControlName="nameFormControl" [errorStateMatcher]="matcher"
@@ -45,7 +45,7 @@
       </mat-card-content>
       <div class="buttons-container">
         <a class="btn-block" routerLink="/login" routerLinkActive="active">Log in</a>
-        <button type="button" class="btn-block" (click)="getRegistry()">
+        <button type="submit" class="btn-block" >
           Registration
         </button>
       </div>

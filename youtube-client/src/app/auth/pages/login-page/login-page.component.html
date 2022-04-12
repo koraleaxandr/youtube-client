@@ -3,7 +3,7 @@
     <mat-card-header>
       <mat-card-title>Log in</mat-card-title>
     </mat-card-header>
-    <form class="example-form" [formGroup]="authorizeForm">
+    <form class="example-form" [formGroup]="authorizeForm" (ngSubmit)="getUserSettings()">
       <mat-card-content>
         <mat-form-field class="example-full-width">
           <input type="name" matInput formControlName="nameFormControl" [errorStateMatcher]="matcher"
@@ -28,7 +28,7 @@
         </mat-form-field>
       </mat-card-content>
       <div class="buttons-container">
-      <button type="button" class="btn-block" (click)="getUserSettings()">Log in</button>
+      <button type="submit" class="btn-block">Log in</button>
       <a class="btn-block" routerLink="/register" routerLinkActive="active"(click)="getUserSettings()">Registration</a> 
       </div>    
     </form>        

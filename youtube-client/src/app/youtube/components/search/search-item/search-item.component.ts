@@ -36,10 +36,8 @@ export class SearchItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.selectedItem = this.route.paramMap.pipe(
-    //   switchMap((params: ParamMap) => this.searchSortService.getItemForId(params.get('id')!)),
-    // );
-    this.selectedItem = this.searchSortService.selectedItem;
-    this.id = this.selectedItem?.id;
+    // this.id = (this.searchSortService.selectedItem as Item).id as string;
+    this.id = this.route.snapshot.paramMap.get('id')!;
+    this.selectedItem = this.searchSortService.getItemForId(this.id);
   }
 }
