@@ -3,7 +3,7 @@
   Sorting by:
   <button [class.selected]="sortSettings.sortByParameter === 'snippet.publishedAt'" (click)="sortSettings.sortByParameter = 'snippet.publishedAt'" (click)="changedSortSettings()">date</button>
   <button [class.selected]="sortSettings.sortByParameter === 'statistics.viewCount'" (click)="sortSettings.sortByParameter = 'statistics.viewCount'" (click)="changedSortSettings()">count of views</button>
-  <button  [class.selected]="sortSettings.sortString"  (click)="changedSortSettings()">by word or sentence</button>
+  <button  [class.selected]="isSortingString()"  (click)="changedSortSettings()"(click)="sortSettings.sortByParameter = 'string'">by word or sentence</button>
   <input type="text" [(ngModel)]="sortSettings.sortString" style="border: transparent" (input)="changedSortSettings()" (keyup)="sortSettings.sortByParameter = 'string'">
 </div>
 </div>

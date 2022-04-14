@@ -19,15 +19,16 @@ export class DropdownSettingsComponent implements OnInit {
 
   @Input() toggleSettings?: string;
 
-  // constructor() { }
-
   ngOnInit(): void {
     this.changeSortSettings.emit(this.sortSettings);
   }
 
   changedSortSettings() {
     this.sortSettings.sortByIncreaseParameter = this.sortSettings.sortByIncreaseParameter === 'increase' ? 'decrease' : 'increase';
-    console.log(JSON.stringify(this.sortSettings));
     this.changeSortSettings.emit(this.sortSettings);
+  }
+
+  isSortingString(): boolean {
+    return !!((this.sortSettings.sortString || this.sortSettings.sortByParameter === 'string'));
   }
 }
