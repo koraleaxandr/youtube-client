@@ -58,18 +58,18 @@
 }
 .sort-input-container {
   position: relative;
-  .mat-icon-button {
-    line-height: 20px;
-    background-color: #fffdfd;
+  .mat-icon-button,
+  .mat-icon {
+    line-height: 19px;
     border-radius: 0px;
   }
 .clear-button{
   position: absolute;
-  height: 20px;
-  width: 20px;
-  right: 0;
+  height: 18px;
+  width: 18px;
+  right: 2px;
   .span {
-  line-height: 20px;
+  line-height: 18px;
   top: -10px;
       vertical-align: top;
 }

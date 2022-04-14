@@ -37,4 +37,8 @@ export class DropdownSettingsComponent implements OnInit {
     this.changeSortSettings.emit(this.sortSettings);
     this.searchSortService.changeSortSettings(this.sortSettings);
   }
+
+  isSortString(): boolean {
+    return !!(this.sortSettings.sortString || this.sortSettings.sortByParameter === 'string');
+  }
 }

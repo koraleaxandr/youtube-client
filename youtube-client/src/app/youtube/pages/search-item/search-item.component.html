@@ -1,0 +1,17 @@
+<div *ngIf="selectedItem">
+
+  <h2>SELECTED VIDEO:{{selectedItem.snippet.title}} </h2>
+  <div>id: {{selectedItem.id}}{{selectedItem.snippet.publishedAt}}</div>
+  <div>
+    <label for="item-name">Channel: </label>
+    <input id="item-name" [(ngModel)]="selectedItem.snippet.channelTitle" placeholder="channelTitle">
+  </div>
+<img src={{selectedItem.snippet.thumbnails.high.url}} alt={{selectedItem.snippet.title}}>
+<div class="item-statistic-container">
+  <div class="item-statistic views">{{selectedItem.statistics.viewCount}}</div>
+  <div class="item-statistic likes">{{selectedItem.statistics.likeCount}}</div>
+  <div class="item-statistic dislikes">{{selectedItem.statistics.dislikeCount}}</div>
+  <div class="item-statistic comments">{{selectedItem.statistics.commentCount}}</div>
+</div>
+<p class="badge">{{selectedItem.snippet.title | uppercase}}</p>
+</div>
