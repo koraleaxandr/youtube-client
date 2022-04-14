@@ -62,7 +62,6 @@ export class SearchSortService {
       this.sortedSearchResult = !this.sortSettings.sortString ? await JSON.parse(JSON.stringify(this.searchResponse)) : this.sortedSearchResult;
       await this.sortSearchResponse(this.searchResponse);
       this.changeSortedSearchResult.next(this.sortedSearchResult);
-      console.log('changes header');
     }
   }
 
@@ -102,7 +101,6 @@ export class SearchSortService {
           if (this.sortSettings.sortString) {
             const sortString: string = this.sortSettings.sortString.toLowerCase();
             this.sortedSearchResult.items = this.sortedSearchResult.items.filter((element) => (JSON.stringify(element.snippet).toString().toLowerCase().includes(sortString)));
-            console.log(this.sortedSearchResult.items.length);
           }
         }
       }

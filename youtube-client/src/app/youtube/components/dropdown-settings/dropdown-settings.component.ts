@@ -33,7 +33,6 @@ export class DropdownSettingsComponent implements OnInit {
 
   changedSortSettings() {
     this.sortSettings.sortByIncreaseParameter = this.sortSettings.sortByIncreaseParameter === 'increase' ? 'decrease' : 'increase';
-    console.log(JSON.stringify(this.sortSettings));
     this.changeSortSettings.emit(this.sortSettings);
     this.searchSortService.changeSortSettings(this.sortSettings);
   }

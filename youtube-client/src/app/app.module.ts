@@ -1,7 +1,10 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,8 +22,6 @@ import { HeaderSearchComponent } from './core/components/header/header-search/he
 import { HeaderLoginComponent } from './core/components/header/header-login/header-login.component';
 import { DropdownSettingsComponent } from './youtube/components/dropdown-settings/dropdown-settings.component';
 import { AngularMaterialModule } from './shared/components/angular-material.module';
-// import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
-// import { UserRegisterComponent } from './auth/pages/user-register/user-register.component';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
 import { AuthenticationModule } from './auth/authentication.module';
 
@@ -33,8 +34,6 @@ import { AuthenticationModule } from './auth/authentication.module';
     HeaderSearchComponent,
     HeaderLoginComponent,
     DropdownSettingsComponent,
-    // LoginPageComponent,
-    // UserRegisterComponent,
     NotFoundComponent,
   ],
   imports: [
