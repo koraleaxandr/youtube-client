@@ -19,6 +19,8 @@ export class UserAuthServiceService {
     userLastName: '',
   };
 
+  redirectUrl: string | null = null;
+
   public isAuthorized: string = 'false';
 
   private changeUserSource = new Subject<string>();
@@ -46,7 +48,6 @@ export class UserAuthServiceService {
     const newUser: UserSettings = user;
     newUser.userAuthToken = this.getUserAuthToken(user);
     this.saveLocalUser(newUser);
-    console.log(JSON.stringify(newUser));
     this.authorizeUser(newUser);
   }
 
