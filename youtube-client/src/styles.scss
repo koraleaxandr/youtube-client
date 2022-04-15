@@ -62,3 +62,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.back-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 5px 5px 0px 0px;
+  font-size: 16px;
+  content: "<";
+}

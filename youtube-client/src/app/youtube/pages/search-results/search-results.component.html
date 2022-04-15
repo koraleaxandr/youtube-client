@@ -1,4 +1,7 @@
 <div class="search-container">
+  <div class="search-result-container" *ngIf="!searchSortService.sortedSearchResult">
+    Try to search something
+  </div>
 <div class="search-result-container" *ngIf="searchSortService.sortedSearchResult">
   <ul class="items">
     <li *ngFor="let item of searchSortService.sortedSearchResult.items">
