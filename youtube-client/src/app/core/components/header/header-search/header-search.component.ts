@@ -37,7 +37,7 @@ export class HeaderSearchComponent {
   public async searchSubmit(): Promise<void> {
     if (this.authService.isAuthorized === 'true') {
       this.searchSortService.getSearchData();
-      this.router.navigate(['youtube-search']);
+      this.router.navigate(['youtube/search']);
     }
   }
 

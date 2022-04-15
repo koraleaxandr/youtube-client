@@ -40,8 +40,6 @@ export class LoginPageComponent implements OnInit {
 
   authService: UserAuthServiceService;
 
-  // @Output() userSettings
-
   constructor(authService: UserAuthServiceService, private router: Router) {
     this.authService = authService;
   }
@@ -49,17 +47,14 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
     this.authService.logInOutUser('false');
     const savedUser: UserSettings | null = this.authService.getSavedLocalUser();
-    console.log(JSON.stringify(savedUser));
     this.userSettings.userName = savedUser?.userName as string;
     this.authorizeForm.controls['nameFormControl'].setValue(this.userSettings.userName);
   }
 
   private passwordMatchingValidator(): boolean {
     if (this.authorizeForm.controls['passwordFormControl'].value === this.authService.getSavedLocalUser()?.userPassword as string) {
-      console.log('true');
       return true;
     }
-    console.log('not math password');
     return false;
   }
 
@@ -75,13 +70,11 @@ export class LoginPageComponent implements OnInit {
   }
 
   private authorizeUserSettings() {
-    console.log(JSON.stringify(this.userSettings));
     if (this.userSettings.userName === this.authService.getSavedLocalUser()?.userName) {
       const matchPassword: boolean = this.passwordMatchingValidator();
-      console.log(this.authorizeForm.status);
       if (this.authorizeForm.status === 'VALID' && matchPassword) {
         this.authService.authorizeUser(this.userSettings);
-        this.router.navigate(['main']);
+        this.router.navigate(['youtube']);
       } else this.authorizeForm.controls['passwordFormControl'].setValue('');
     } else {
       this.authService.userSettings = this.userSettings;

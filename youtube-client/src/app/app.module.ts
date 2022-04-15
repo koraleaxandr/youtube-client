@@ -16,8 +16,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './core/components/header/header.component';
-import { SearchResultsComponent } from './youtube/pages/search-results/search-results.component';
-import { SearchItemComponent } from './youtube/pages/search-item/search-item.component';
 import { HeaderSearchComponent } from './core/components/header/header-search/header-search.component';
 import { HeaderLoginComponent } from './core/components/header/header-login/header-login.component';
 import { DropdownSettingsComponent } from './youtube/components/dropdown-settings/dropdown-settings.component';
@@ -29,8 +27,6 @@ import { AuthenticationModule } from './auth/authentication.module';
   declarations: [
     AppComponent,
     HeaderComponent,
-    SearchResultsComponent,
-    SearchItemComponent,
     HeaderSearchComponent,
     HeaderLoginComponent,
     DropdownSettingsComponent,
