@@ -8,11 +8,13 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
 import { SearchItemComponent } from './pages/search-item/search-item.component';
 
 import { YoutubeRoutingModule } from './youtube-routing.module';
+import { ColorOnDateDirective } from './directives/color-on-date.directive';
 
 @NgModule({
   declarations: [
     SearchResultsComponent,
     SearchItemComponent,
+    ColorOnDateDirective,
   ],
   imports: [
     CommonModule,

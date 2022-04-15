@@ -35,7 +35,6 @@ export class AuthorizeGuard implements CanActivate {
   checkLogin(url: string): true | UrlTree {
     if (this.authService.isAuthorized === 'true') { return true; }
     this.authService.redirectUrl = url;
-    console.log('guard working');
     return this.router.parseUrl('/login');
   }
 }

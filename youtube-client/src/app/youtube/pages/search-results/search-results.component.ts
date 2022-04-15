@@ -41,35 +41,37 @@ export class SearchResultsComponent implements OnInit {
     this.router.navigate(['/youtube/detailed-information/', this.selectedItem.id]);
   }
 
-  getColorPublicationDate(publishedAt: string): string {
-    let color = 'green';
-    const millisecondsInWeek: number = 7 * 24 * 60 * 60 * 1000;
-    const today = new Date('2019-10-15T15:00:14.000Z');
-    const publicationDate = new Date(publishedAt);
-    const getDateYear = (date: Date): number => Number(date.getUTCFullYear());
-    const getDateMonth = (date: Date): number => (Number(date.getUTCMonth() + 1) + getDateYear(date) * 12);
-    const getDateDay = (date: Date): number => Number(date.getUTCDate());
+  // getColorPublicationDate(publishedAt: string): string {
+  //   let color = 'green';
+  //   const MILLISECONDS_IN_WEEK: number = 7 * 24 * 60 * 60 * 1000;
+  //   const redColorPublicationsMonthCount: number = 6;
+  //   const greenColorPublicationsMonthCount: number = 1;
+  //   const today = new Date('2019-10-15T15:00:14.000Z');
+  //   const publicationDate = new Date(publishedAt);
+  //   const getDateYear = (date: Date): number => Number(date.getUTCFullYear());
+  //   const getDateMonth = (date: Date): number => (Number(date.getUTCMonth() + 1) + getDateYear(date) * 12);
+  //   const getDateDay = (date: Date): number => Number(date.getUTCDate());
 
-    if ((getDateMonth(today) - getDateMonth(publicationDate)) > 6) {
-      color = 'red';
-      return color;
-    }
-    if (((getDateMonth(today) - getDateMonth(publicationDate)) === 6) && (getDateDay(today) < getDateDay(publicationDate))) {
-      color = 'yellow';
-      return color;
-    }
-    if (getDateMonth(today) - getDateMonth(publicationDate) > 1) {
-      color = 'yellow';
-      return color;
-    }
-    if ((getDateMonth(today) - getDateMonth(publicationDate) === 1) && (getDateDay(today) > getDateDay(publicationDate))) {
-      color = 'yellow';
-      return color;
-    }
-    if ((Number(today) - Number(publicationDate.getTime())) <= millisecondsInWeek) {
-      color = 'blue';
-      return color;
-    }
-    return color;
-  }
+  //   if ((getDateMonth(today) - getDateMonth(publicationDate)) > redColorPublicationsMonthCount) {
+  //     color = 'red';
+  //     return color;
+  //   }
+  //   if (((getDateMonth(today) - getDateMonth(publicationDate)) === redColorPublicationsMonthCount) && (getDateDay(today) < getDateDay(publicationDate))) {
+  //     color = 'yellow';
+  //     return color;
+  //   }
+  //   if (getDateMonth(today) - getDateMonth(publicationDate) > greenColorPublicationsMonthCount) {
+  //     color = 'yellow';
+  //     return color;
+  //   }
+  //   if ((getDateMonth(today) - getDateMonth(publicationDate) === greenColorPublicationsMonthCount) && (getDateDay(today) > getDateDay(publicationDate))) {
+  //     color = 'yellow';
+  //     return color;
+  //   }
+  //   if ((Number(today) - Number(publicationDate.getTime())) <= MILLISECONDS_IN_WEEK) {
+  //     color = 'blue';
+  //     return color;
+  //   }
+  //   return color;
+  // }
 }
