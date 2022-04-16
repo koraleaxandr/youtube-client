@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, Output, EventEmitter,
+  Component, Output, EventEmitter,
 } from '@angular/core';
 import {
   Router,
@@ -16,7 +16,7 @@ import { SearchSortService } from '../../../../youtube/services/search-sort.serv
   styleUrls: ['./header-search.component.scss'],
 })
 
-export class HeaderSearchComponent implements OnInit {
+export class HeaderSearchComponent {
   @Output() toggle = new EventEmitter<string>();
 
   @Output() searchResponse = new EventEmitter<SearchResponse>();
@@ -34,15 +34,10 @@ export class HeaderSearchComponent implements OnInit {
     this.searchSortService = searchSortService;
   }
 
-  ngOnInit(): void {
-    console.log('temporally');
-  }
-
   public async searchSubmit(): Promise<void> {
     if (this.authService.isAuthorized === 'true') {
       this.searchSortService.getSearchData();
-      // this.searchResponse.emit(data);
-      this.router.navigate(['youtube-search']);
+      this.router.navigate(['youtube/search']);
     }
   }
 

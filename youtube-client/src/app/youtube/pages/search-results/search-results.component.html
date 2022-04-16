@@ -1,3 +1,7 @@
+<div class="search-container">
+  <div class="search-result-container" *ngIf="!searchSortService.sortedSearchResult">
+    Try to search something
+  </div>
 <div class="search-result-container" *ngIf="searchSortService.sortedSearchResult">
   <ul class="items">
     <li *ngFor="let item of searchSortService.sortedSearchResult.items">
@@ -11,7 +15,8 @@
         </div>
       <p class="badge">{{item.snippet.title | uppercase}}</p>
       <button [class.selected]="item === selectedItem" type="button" (click)="onSelect(item)">more...</button>
-      <div class="item-bottom-line" [ngStyle]="{'background-color':  getColorPublicationDate(item.snippet.publishedAt)}"></div>
+      <div class="item-bottom-line" [appColorOnDate]="item.snippet.publishedAt"></div>
     </li>
   </ul>
+</div>
 </div>

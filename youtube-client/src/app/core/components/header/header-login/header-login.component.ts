@@ -1,8 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import {
   Router,
 } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {
+  Subscription,
+} from 'rxjs';
 import {
   UserAuthServiceService,
 } from '../../../../auth/services/user-auth-service.service';
@@ -13,7 +19,7 @@ import {
   styleUrls: ['./header-login.component.scss'],
 })
 export class HeaderLoginComponent implements OnInit {
-  @Input()name: string = 'Your Name';
+  @Input() name: string = 'Your Name';
 
   userLogoUrl: string = '../../../assets/svg/Login.svg';
 
@@ -35,6 +41,6 @@ export class HeaderLoginComponent implements OnInit {
     if (this.authService.isAuthorized === 'true') {
       this.authService.getSavedLocalUser();
       this.name = this.authService.userSettings.userName;
-    } else this.router.navigate(['login']);
+    }
   }
 }

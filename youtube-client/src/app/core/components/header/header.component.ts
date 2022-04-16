@@ -1,8 +1,5 @@
 import {
   Component,
-  EventEmitter,
-  OnInit,
-  Output,
 } from '@angular/core';
 
 @Component({
@@ -10,16 +7,10 @@ import {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   toggleSettings: string = 'off';
-
-  // constructor() {}
-
-  ngOnInit(): void {
-    console.log('header.component');
-  }
 
   toggleDropSettings(toggle: string): void {
     this.toggleSettings = toggle;
-  }  
+  }
 }

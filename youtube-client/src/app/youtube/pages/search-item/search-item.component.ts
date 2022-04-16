@@ -10,10 +10,10 @@ import {
 // import { switchMap } from 'rxjs/operators';
 import {
   Item,
-} from '../../../models/search-item.model';
+} from '../../models/search-item.model';
 import {
   SearchSortService,
-} from '../../../services/search-sort.service';
+} from '../../services/search-sort.service';
 
 @Component({
   selector: 'app-search-item',

@@ -40,7 +40,6 @@ export class UserRegisterComponent implements OnInit {
 
   constructor(
     authService: UserAuthServiceService,
-    // TODO private route: ActivatedRoute,
     private router: Router,
   ) {
     this.authService = authService;
@@ -48,7 +47,6 @@ export class UserRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.userSettings = this.authService.userSettings;
-    console.log(this.userSettings);
     this.registryFormGroup.controls['nameFormControl'].setValue(this.userSettings.userName);
     this.registryFormGroup.controls['passwordFormControl'].setValue(this.userSettings.userPassword);
   }
@@ -69,8 +67,6 @@ export class UserRegisterComponent implements OnInit {
 
   getRegistry() {
     this.getUserSettings();
-    console.log(this.registryFormGroup.status);
-    console.log(this.userSettings);
     if (this.registryFormGroup.status === 'VALID') {
       this.authService.registryUser(this.userSettings);
       this.router.navigate(['main']);

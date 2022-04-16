@@ -1,11 +1,14 @@
 .login-wrapper {
   height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .box {
   position: relative;
   top: 45px;
-  height: 250px;
+  height: 250px;  
+  margin: 0 auto;
   opacity: 1;
   float: left;
   padding: 60px 50px 40px 50px;
