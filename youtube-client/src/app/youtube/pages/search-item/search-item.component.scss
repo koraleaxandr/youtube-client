@@ -1,15 +1,19 @@
-:host {
-  display: flex;
-  align-items: center;
+.item-container {
+  max-width: 1200px;
+  margin: 45px auto;
+  display: grid;
+  align-items:flex-start;
+  justify-content: center;
+  grid-template-columns: 32px 1fr;
 }
 
 .video-container{
-  max-width: 1200;
+  max-width: 1165px;
   align-self: center;
-  margin: 0 auto;
   display: flex;
-  flex-flow: row;
+  flex-direction:row;
   flex-wrap: wrap;
+  // box-shadow:(5px 10px 10px rgba(47, 128, 237, 0.25));
 }
 
 .item-thumbnail{
@@ -17,12 +21,37 @@
   max-width: 728px;
   height: 460px;
   max-height: 460px;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .item-description-container {
   width: 100%;
-  max-width: 360px;
-  height: 100%;
+  max-width: 437px;
+  height: 460px;
+  display: grid;
+  grid-template-rows: 1fr 5fr 13px 6px;
+  border-radius: 5px;
+  .title {
+    width: 100%;
+    h2{
+      margin: 10px 5px;
+    }
+    p {
+      right: 0px;
+      min-width: 75px;
+      font-size: 12px;
+      padding: 0px;
+      text-align: right;
+      color: blue;
+    }
+  }
+  .description {    
+    overflow: auto;
+    max-height: 300px;
+    margin: 5px;
+    
+  }
 }
 
 .item-statistic-container {
@@ -37,6 +66,8 @@
 .item-statistic {
   width: 100%;
   height: 100%;
+  position: relative;
+  bottom: 5px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left;
@@ -60,4 +91,12 @@
 
 .comments {
   background-image: url(../../../../assets/svg/comments.svg);
+}
+
+.item-bottom-line{
+  position: relative;
+  width:auto;
+  height: 6px;
+  bottom: 0px;
+  border-radius: 0 0 3px 0px;
 }

@@ -7,7 +7,7 @@
   <div class="sort-input-container">
   <input  type="text" [(ngModel)]="sortSettings.sortString" style="border: transparent" (input)="changedSortSettings()" (keyup)="sortSettings.sortByParameter = 'string'">
   <button *ngIf="sortSettings.sortString" class="clear-button" matSuffix mat-icon-button aria-label="Clear" (click)="sortSettings.sortString=''" (click)="changedSortSettings()">
-    <mat-icon>close</mat-icon>
+    <mat-icon>clear</mat-icon>
   </button></div>
 </div>
 </div>
