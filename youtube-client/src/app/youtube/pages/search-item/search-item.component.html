@@ -8,8 +8,8 @@
     </div>
     <div class="item-description-container">
       <div class="title">
-        <p>{{selectedItem.snippet.publishedAt | date}}</p>
         <h2>{{selectedItem.snippet.title}} </h2>
+        <p>{{selectedItem.snippet.publishedAt | date:'fullDate'}}</p>        
       </div>
       <div class="description">
         <h4>Description:</h4>

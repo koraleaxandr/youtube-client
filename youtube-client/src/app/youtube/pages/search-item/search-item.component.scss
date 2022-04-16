@@ -5,6 +5,7 @@
   align-items:flex-start;
   justify-content: center;
   grid-template-columns: 32px 1fr;
+  color: black;
 }
 
 .video-container{
@@ -33,24 +34,29 @@
   grid-template-rows: 1fr 5fr 13px 6px;
   border-radius: 5px;
   .title {
+    position: relative;
     width: 100%;
     h2{
-      margin: 10px 5px;
+      margin: 15px 5px;
     }
     p {
-      right: 0px;
-      min-width: 75px;
+      position: absolute;
+      top: 3px;
+      right: 5px;
+      min-width: 105px;
       font-size: 12px;
       padding: 0px;
       text-align: right;
-      color: blue;
+      color:#828282;
     }
   }
   .description {    
     overflow: auto;
     max-height: 300px;
     margin: 5px;
-    
+    p {
+      color: #828282;
+    }
   }
 }
 
@@ -61,6 +67,7 @@
   display: grid;
   grid-template-columns: 1.5fr repeat(3, 1fr);
   gap: 10px;
+  color: black;
 }
 
 .item-statistic {
