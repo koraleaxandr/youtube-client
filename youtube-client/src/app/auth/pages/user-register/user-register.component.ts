@@ -7,6 +7,7 @@ import {
   FormControl,
   FormGroup,
   Validators,
+  AbstractControl, ValidationErrors, ValidatorFn,
 } from '@angular/forms';
 
 import {
@@ -47,17 +48,31 @@ export class UserRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.userSettings = this.authService.userSettings;
-    this.registryFormGroup.controls['nameFormControl'].setValue(this.userSettings.userName);
+    this.registryFormGroup.controls['emailFormControl'].setValue(this.userSettings.userMail);
     this.registryFormGroup.controls['passwordFormControl'].setValue(this.userSettings.userPassword);
   }
 
   registryFormGroup: FormGroup = new FormGroup({
     emailFormControl: new FormControl('', [Validators.required, Validators.email]),
     nameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(8), this.validatePasswordStrength()]),
   });
 
   matcher = new MyErrorStateMatcher();
+
+  private validatePasswordStrength(): ValidatorFn {
+    return (control:AbstractControl) : ValidationErrors | null => {
+      const { value } = control;
+      if (!value) {
+        return null;
+      }
+      const upperCaseCheck = /[A-Z]+/.test(value);
+      const lowerCaseCheck = /[a-z]+/.test(value);
+      const numericCheck = /[0-9]+/.test(value);
+      const validPassword = upperCaseCheck && lowerCaseCheck && numericCheck;
+      return !validPassword ? ({ passwordStrength: true }) : null;
+    };
+  }
 
   getUserSettings() {
     this.userSettings.userName = this.registryFormGroup.controls['nameFormControl'].value;

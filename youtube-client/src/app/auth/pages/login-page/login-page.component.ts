@@ -8,6 +8,7 @@ import {
   FormControl,
   FormGroup,
   Validators,
+  AbstractControl, ValidationErrors, ValidatorFn,
 } from '@angular/forms';
 import {
   Router,
@@ -47,39 +48,57 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
     this.authService.logInOutUser('false');
     const savedUser: UserSettings | null = this.authService.getSavedLocalUser();
-    this.userSettings.userName = savedUser?.userName as string;
-    this.authorizeForm.controls['nameFormControl'].setValue(this.userSettings.userName);
+    this.userSettings.userMail = savedUser?.userMail as string;
+    this.authorizeForm.controls['emailFormControl'].setValue(this.userSettings.userMail);
   }
 
-  private passwordMatchingValidator(): boolean {
-    if (this.authorizeForm.controls['passwordFormControl'].value === this.authService.getSavedLocalUser()?.userPassword as string) {
-      return true;
-    }
-    return false;
+  private passwordMatchingValidator(): ValidatorFn {
+    return (control:AbstractControl) : ValidationErrors | null => {
+      const { value } = control;
+      if (!value) {
+        return null;
+      }
+      const validPassword = (value === this.authService.getSavedLocalUser()?.userPassword as string);
+      return !validPassword ? ({ passwordMatch: true }) : null;
+    };
   }
 
   public authorizeForm: FormGroup = new FormGroup({
-    nameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    emailFormControl: new FormControl('', [Validators.required, Validators.email]),
+    passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(8), this.validatePasswordStrength(), this.passwordMatchingValidator()]),
   });
 
+  private validatePasswordStrength(): ValidatorFn {
+    return (control:AbstractControl) : ValidationErrors | null => {
+      const { value } = control;
+      if (!value) {
+        return null;
+      }
+      const upperCaseCheck = /[A-Z]+/.test(value);
+      const lowerCaseCheck = /[a-z]+/.test(value);
+      const numericCheck = /[0-9]+/.test(value);
+      const validPassword = upperCaseCheck && lowerCaseCheck && numericCheck;
+      return !validPassword ? ({ passwordStrength: true }) : null;
+    };
+  }
+
   public getUserSettings() {
-    this.userSettings.userName = this.authorizeForm.controls['nameFormControl'].value;
+    this.userSettings.userMail = this.authorizeForm.controls['emailFormControl'].value;
     this.userSettings.userPassword = this.authorizeForm.controls['passwordFormControl'].value;
     this.authorizeUserSettings();
   }
 
-  private authorizeUserSettings() {
-    if (this.userSettings.userName === this.authService.getSavedLocalUser()?.userName) {
-      const matchPassword: boolean = this.passwordMatchingValidator();
-      if (this.authorizeForm.status === 'VALID' && matchPassword) {
-        this.authService.authorizeUser(this.userSettings);
+  private async authorizeUserSettings() {
+    if (this.userSettings.userMail === this.authService.getSavedLocalUser()?.userMail) {
+      if (this.authorizeForm.status === 'VALID') {
+        await this.authService.authorizeUser(this.userSettings);
         this.router.navigate(['youtube']);
-      } else this.authorizeForm.controls['passwordFormControl'].setValue('');
+      }
     } else {
       this.authService.userSettings = this.userSettings;
-      this.authorizeForm.controls['nameFormControl'].setValue('');
-      this.authorizeForm.controls['passwordFormControl'].setValue('');
+      // this.authorizeForm.controls['nameFormControl'].setValue('');
+      // this.authorizeForm.controls['passwordFormControl'].setValue('');
+      this.router.navigate(['/register']);
     }
   }
 }

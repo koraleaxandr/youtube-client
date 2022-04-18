@@ -63,7 +63,7 @@ export class UserAuthServiceService {
     let newUser: UserSettings = user;
     const localSavedUser: UserSettings | null = this.getSavedLocalUser();
     if (localSavedUser) {
-      if (newUser.userName === localSavedUser.userName) {
+      if (newUser.userMail === localSavedUser.userMail) {
         newUser = localSavedUser;
         this.logInOutUser('true');
         localStorage.setItem('isAuthorized', 'true');
