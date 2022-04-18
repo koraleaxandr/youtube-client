@@ -4,6 +4,7 @@ import {
 import {
   Router,
 } from '@angular/router';
+
 import { SearchResponse } from '../../../../youtube/models/search-response.model';
 import {
   UserAuthServiceService,
@@ -17,6 +18,8 @@ import { SearchSortService } from '../../../../youtube/services/search-sort.serv
 })
 
 export class HeaderSearchComponent {
+  searchString: string = '';
+
   @Output() toggle = new EventEmitter<string>();
 
   @Output() searchResponse = new EventEmitter<SearchResponse>();
@@ -35,7 +38,9 @@ export class HeaderSearchComponent {
   }
 
   public async searchSubmit(): Promise<void> {
-    if (this.authService.isAuthorized === 'true') {
+    const MINIMAL_REQUEST_LENGTH: number = 2;
+    if (this.authService.isAuthorized === 'true' && this.searchString.length > MINIMAL_REQUEST_LENGTH) {
+      // this.searchTextChanged.next(this.searchString);
       this.searchSortService.getSearchData();
       this.router.navigate(['youtube/search']);
     }

@@ -19,6 +19,8 @@ import {
   styleUrls: ['./header-login.component.scss'],
 })
 export class HeaderLoginComponent implements OnInit {
+  isAuthorized: boolean = false;
+
   @Input() name: string = 'Your Name';
 
   userLogoUrl: string = '../../../assets/svg/Login.svg';
@@ -27,6 +29,8 @@ export class HeaderLoginComponent implements OnInit {
 
   subscription: Subscription;
 
+  authStatus: Subscription;
+
   constructor(authService: UserAuthServiceService, private router: Router) {
     this.authService = authService;
     this.subscription = authService.changeUser$.subscribe(
@@ -34,6 +38,9 @@ export class HeaderLoginComponent implements OnInit {
         this.name = userName;
       },
     );
+    this.authStatus = authService.isUserAuthorized$.subscribe((userStatus) => {
+      this.isAuthorized = userStatus;
+    });
   }
 
   ngOnInit(): void {
@@ -41,6 +48,7 @@ export class HeaderLoginComponent implements OnInit {
     if (this.authService.isAuthorized === 'true') {
       this.authService.getSavedLocalUser();
       this.name = this.authService.userSettings.userName;
-    }
+      this.isAuthorized = true;
+    } else this.isAuthorized = false;
   }
 }

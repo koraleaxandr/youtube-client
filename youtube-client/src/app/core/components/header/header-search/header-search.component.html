@@ -1,9 +1,14 @@
 <div class="header-search-container">
   <div class="app-logo"></div>
-  <input [(ngModel)]="name" placeholder="What are you want to find out?" class="header-search-input" style="border: transparent">  
-  <button class="search-button"type="button" (click)="searchSubmit()">search
-    <mat-icon>youtube_searched_for</mat-icon>   
-  </button>
+  <input [(ngModel)]="searchString" placeholder="What are you want to find out?" class="header-search-input" style="border: transparent"[(ngModel)]="searchString" (input)="searchSubmit()">
+  <!-- <button *ngIf="searchString" class="clear-button" matSuffix mat-icon-button aria-label="Clear" (click)="searchString = ''" (click)="searchSubmit()"> -->
+    
+  <!-- </button>   -->
+  <div class="search-button"type="button" (click)="searchSubmit()">
+    <!-- search -->
+    <mat-icon class="clear-button"*ngIf="searchString"(click)="searchString = ''" (click)="searchSubmit()">clear</mat-icon>
+    <!-- <mat-icon>youtube_searched_for</mat-icon>    -->
+  </div>
   <button class="search-dropdown-settings" type="button" (click)="toggleSettings()"></button>
   <button class="search-button" routerLink="/youtube/admin-page" routerLinkActive="active">Create new card</button>
 </div>

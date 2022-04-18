@@ -25,12 +25,17 @@ export class UserAuthServiceService {
 
   private changeUserSource = new Subject<string>();
 
+  private isUserAuthorized = new Subject<boolean>();
+
   changeUser$ = this.changeUserSource.asObservable();
+
+  isUserAuthorized$ = this.isUserAuthorized.asObservable();
 
   // constructor() { }
   getIsAuthorizedStatus(): void {
     this.isAuthorized = localStorage.getItem('isAuthorized') ? localStorage.getItem('isAuthorized') as string : 'false';
     this.userSettings.userName = this.isAuthorized === 'true' ? this.getSavedLocalUser()?.userName as string : '';
+    this.logInOutUser(this.isAuthorized);
   }
 
   getSavedLocalUser(): UserSettings | null {
@@ -68,6 +73,7 @@ export class UserAuthServiceService {
         this.logInOutUser('true');
         localStorage.setItem('isAuthorized', 'true');
         this.changeUserSource.next(newUser.userName);
+        this.isUserAuthorized.next(true);
       }
     }
   }
@@ -75,5 +81,7 @@ export class UserAuthServiceService {
   logInOutUser(status: string) {
     localStorage.setItem('isAuthorized', status);
     this.isAuthorized = status;
+    const userStatus: boolean = status as unknown as boolean;
+    this.isUserAuthorized.next(userStatus);
   }
 }

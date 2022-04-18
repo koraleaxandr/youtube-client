@@ -17,5 +17,12 @@
   background-repeat: no-repeat;
   margin: 0 10px;
   box-shadow: none;
-  cursor: pointer;
+}
+
+.log-out-button {
+  height: 24px;
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,4 +1,5 @@
 <div class="user-login-container">
 <p> {{name}}</p>
-<div class="user-logo" routerLink="login"></div>
+<div class="user-logo"></div>
+<button class="log-out-button" *ngIf="isAuthorized === true" routerLink="login" (click)="authService.logInOutUser('false')">Log out</button>
 </div>
