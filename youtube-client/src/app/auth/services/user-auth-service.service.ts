@@ -58,8 +58,8 @@ export class UserAuthServiceService {
 
   getUserAuthToken(user: UserSettings): string {
     const newUser: UserSettings = user;
-    newUser.userAuthToken = 'balaBlaUserToken12345678';
-    const token = 'balaBlaUserToken12345678';
+    newUser.userAuthToken = 'AIzaSyDymexQ-mAOw13v6xGt4nDgQk9RavcQs4s';
+    const token = 'AIzaSyDymexQ-mAOw13v6xGt4nDgQk9RavcQs4s';
     return token;
   }
 
