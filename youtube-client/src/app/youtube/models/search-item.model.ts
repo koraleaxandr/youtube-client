@@ -44,7 +44,7 @@ export interface Item {
     },
     defaultAudioLanguage: string
   },
-  statistics: {
+  statistics?: {
     viewCount: string,
     likeCount: string,
     dislikeCount: string,

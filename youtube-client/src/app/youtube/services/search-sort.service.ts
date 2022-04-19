@@ -2,13 +2,28 @@ import {
   Injectable,
 } from '@angular/core';
 import {
+  catchError,
+  // debounce,
+  debounceTime,
   Subject,
+  // Observable,
+  throwError,
 } from 'rxjs';
+import {
+  HttpClient,
+  // HttpHeaders,
+  // HttpParams,
+  HttpErrorResponse,
+} from '@angular/common/http';
+
+// import { catchError, retry } from 'rxjs/operators';
+
 import {
   SortSettings,
 } from '../models/sort-settings.model';
 import {
   SearchResponse,
+  YoutubeSearchList,
 } from '../models/search-response.model';
 import {
   Item,
@@ -34,26 +49,57 @@ export class SearchSortService {
 
   changeSortedSearchResult$ = this.changeSortedSearchResult.asObservable();
 
-  // constructor() { }
+  searchTextChanged = new Subject <string>();
 
-  public async getSearchData(): Promise < void > {
-    const url = `https://raw.githubusercontent.com/rolling-scopes-school/tasks/aaacab024b04449e1ae31a938a6983ffb7e7549a/tasks/angular/response.json
-    `;
-    const searchResponse: Response = await fetch(url);
-    if (searchResponse.ok) {
-      const data: SearchResponse = await searchResponse.json() as unknown as SearchResponse;
-      this.searchResponse = data;
-      this.getSearchResponse(data);
-    }
+  searchTextChanged$ = this.searchTextChanged.asObservable();
+
+  constructor(private http: HttpClient) {
+    this.searchTextChanged.pipe(
+      debounceTime(3000),
+      catchError(this.handleError),
+    ).subscribe((searchString) => {
+      console.log(searchString);
+      this.getSearchDataFromGit();
+    });
   }
 
-  async getSearchResponse(data: SearchResponse): Promise < void > {
-    this.searchResponse = data;
+  public async getSearchDataFromGit(): Promise < void > {
+    const url = `https://raw.githubusercontent.com/rolling-scopes-school/tasks/aaacab024b04449e1ae31a938a6983ffb7e7549a/tasks/angular/response.json
+    `;
+
+    this.http.get<SearchResponse>(url).subscribe((data: SearchResponse) => {
+      this.searchResponse = { ...data };
+      console.log(this.searchResponse);
+      this.getSearchResponse();
+    });
+  }
+
+  public async getSearchData(): Promise < void > {
+    const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=sunset%7Cbeach&type=video&key=[YOUR_API_KEY]'
+    `;
+
+    this.http.get<SearchResponse>(url).subscribe((data: SearchResponse) => {
+      this.searchResponse = { ...data };
+      console.log(this.searchResponse);
+      this.getSearchResponse();
+    });
+  }
+
+  async getSearchResponse(): Promise < void > {
     if (this.searchResponse) {
       this.sortedSearchResult = await JSON.parse(JSON.stringify(this.searchResponse));
       await this.sortSearchResponse(this.searchResponse);
       this.changeSortedSearchResult.next(this.sortedSearchResult);
     }
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      console.error('An error occurred:', error.error);
+    } else {
+      console.error(`Backend returned code ${error.status}, body was: `, error.error);
+    }
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
   async changeSortSettings(changedSortSettings: SortSettings): Promise < void > {
@@ -84,14 +130,18 @@ export class SearchSortService {
       } else if (this.sortSettings.sortByParameter === 'statistics.viewCount') {
         if (this.sortSettings.sortByIncreaseParameter === 'increase') {
           this.sortedSearchResult.items = this.sortedSearchResult.items.sort((a: Item, b: Item) => {
+            const aParameter = !Number.isNaN(a.statistics?.viewCount) ? Number(a.statistics?.viewCount) : 0;
+            const bParameter = !Number.isNaN(b.statistics?.viewCount) ? Number(b.statistics?.viewCount) : 0;
             let sort: number = 0;
-            sort = (Number(a.statistics.viewCount) - Number(b.statistics.viewCount)) > 0 ? 1 : -1;
+            sort = (aParameter - bParameter) > 0 ? 1 : -1;
             return sort;
           });
         } else {
           this.sortedSearchResult.items = this.sortedSearchResult.items.sort((a: Item, b: Item) => {
             let sort: number = 0;
-            sort = (Number(b.statistics.viewCount) - Number(a.statistics.viewCount)) > 0 ? 1 : -1;
+            const aParameter = !Number.isNaN(a.statistics?.viewCount) ? Number(a.statistics?.viewCount) : 0;
+            const bParameter = !Number.isNaN(b.statistics?.viewCount) ? Number(b.statistics?.viewCount) : 0;
+            sort = (bParameter - aParameter) > 0 ? 1 : -1;
             return sort;
           });
         }

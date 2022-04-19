@@ -16,10 +16,10 @@
         <p>{{selectedItem.snippet.description}}</p>
       </div>
       <div class="item-statistic-container">
-        <div class="item-statistic views">{{selectedItem.statistics.viewCount}}</div>
-        <div class="item-statistic likes">{{selectedItem.statistics.likeCount}}</div>
-        <div class="item-statistic dislikes">{{selectedItem.statistics.dislikeCount}}</div>
-        <div class="item-statistic comments">{{selectedItem.statistics.commentCount}}</div>
+        <div *ngIf="selectedItem.statistics" class="item-statistic views">{{selectedItem.statistics.viewCount || 0}}</div>
+          <div *ngIf="selectedItem.statistics" class="item-statistic likes">{{selectedItem.statistics.likeCount || 0}}</div>
+          <div *ngIf="selectedItem.statistics" class="item-statistic dislikes">{{selectedItem.statistics.dislikeCount || 0}}</div>
+          <div *ngIf="selectedItem.statistics" class="item-statistic comments">{{selectedItem.statistics.commentCount || 0}}</div>
       </div>
       <div class="item-bottom-line" [appColorOnDate]="selectedItem.snippet.publishedAt"></div>
     </div>
