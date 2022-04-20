@@ -63,10 +63,9 @@ export class SearchSortService {
   constructor(authService: UserAuthServiceService, private http: HttpClient) {
     this.authService = authService;
     this.searchTextChanged.pipe(
-      debounceTime(3000),
+      debounceTime(1000),
       catchError(this.handleError),
     ).subscribe((searchString) => {
-      console.log(searchString);
       this.getSearchData(searchString);
     });
   }
@@ -77,19 +76,23 @@ export class SearchSortService {
 
     this.http.get<SearchResponse>(url).subscribe((data: SearchResponse) => {
       this.searchResponse = { ...data };
-      console.log(this.searchResponse);
       this.getSearchResponse();
     });
   }
 
   public async getSearchData(searchString: string): Promise < void > {
-    const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchString.replace(' ', '%7')}&type=video&key=${this.authService.userSettings.userAuthToken}`;
+    const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchString.replace(' ', '%7')}&type=video&maxResults=15&key=${this.authService.userSettings.userAuthToken}`;
+    this.http.get<YoutubeSearchList>(url).subscribe(async (data: YoutubeSearchList) => {
+      this.youtubeSearchList = { ...data };
+      await this.getStatisticsForSearchedItems();
+    });
+  }
 
-    console.log(url);
-
-    this.http.get<SearchResponse>(url).subscribe((data: SearchResponse) => {
+  private async getStatisticsForSearchedItems(): Promise< void > {
+    const searchedItemsString: string = this.getSearchStringForStatisticsQuery(this.youtubeSearchList);
+    const url: string = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${searchedItemsString}&maxResults=15&access_token=AIzaSyDymexQ-mAOw13v6xGt4nDgQk9RavcQs4s&key=${this.authService.userSettings.userAuthToken}`;
+    await this.http.get<SearchResponse>(url).subscribe(async (data: SearchResponse) => {
       this.searchResponse = { ...data };
-      console.log(this.youtubeSearchList);
       this.getSearchResponse();
     });
   }
@@ -114,14 +117,14 @@ export class SearchSortService {
   async changeSortSettings(changedSortSettings: SortSettings): Promise < void > {
     this.sortSettings = changedSortSettings;
     if (this.searchResponse) {
-      this.sortedSearchResult = !this.sortSettings.sortString ? await JSON.parse(JSON.stringify(this.searchResponse)) : this.sortedSearchResult;
+      this.sortedSearchResult = await JSON.parse(JSON.stringify(this.searchResponse));
       await this.sortSearchResponse(this.searchResponse);
       this.changeSortedSearchResult.next(this.sortedSearchResult);
     }
   }
 
   async sortSearchResponse(inputSearchResponse: SearchResponse): Promise < void > {
-    if (this.sortedSearchResult) {
+    if (this.sortedSearchResult?.items?.length) {
       if (this.sortSettings.sortByParameter === 'snippet.publishedAt') {
         if (this.sortSettings.sortByIncreaseParameter === 'increase') {
           this.sortedSearchResult.items = this.sortedSearchResult.items.sort((a: Item, b: Item) => {
@@ -166,8 +169,16 @@ export class SearchSortService {
     }
   }
 
+  private getSearchStringForStatisticsQuery(searchResponse: YoutubeSearchList | null): string {
+    let queryString: string = '';
+    searchResponse?.items?.forEach((element) => {
+      queryString += `${element.id.videoId},`;
+    });
+    return queryString;
+  }
+
   getItemForId(id: string): Item {
-    const detailedItem: Item = ((this.sortedSearchResult as SearchResponse).items).filter((element) => (element.id.videoId === id))[0] as Item;
+    const detailedItem: Item = ((this.sortedSearchResult as SearchResponse).items).filter((element) => (element.id === id))[0] as Item;
     return detailedItem;
   }
 

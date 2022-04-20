@@ -1,10 +1,7 @@
 export interface Item {
   kind: string,
   etag: string,
-  id: {
-    kind: string,
-    videoId: string
-  },
+  id: string,
   snippet: {
     publishedAt: string,
     channelId: string,

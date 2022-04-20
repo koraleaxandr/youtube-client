@@ -38,6 +38,6 @@ export class SearchResultsComponent implements OnInit {
   onSelect(item: Item): void {
     this.selectedItem = item;
     this.searchSortService.selectedItem = item;
-    this.router.navigate(['/youtube/detailed-information/', this.selectedItem.id.videoId]);
+    this.router.navigate(['/youtube/detailed-information/', this.selectedItem.id]);
   }
 }
