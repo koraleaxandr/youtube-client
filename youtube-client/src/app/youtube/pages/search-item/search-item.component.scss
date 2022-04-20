@@ -20,16 +20,16 @@
 .item-thumbnail{
   width: 100%;
   max-width: 728px;
-  height: 410px;
-  max-height: 460px;
+  height: 460px;
   background-size: cover;
+  background-position-y: center;
   background-repeat: no-repeat;
 }
 
 .item-description-container {
   width: 100%;
   max-width: 437px;
-  height: 410px;
+  height: 460px;
   display: grid;
   grid-template-rows: 1fr 5fr 13px 6px;
   border-radius: 5px;
