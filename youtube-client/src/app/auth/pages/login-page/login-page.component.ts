@@ -1,8 +1,6 @@
 import {
   Component,
   OnInit,
-  // Output,
-  // Input
 } from '@angular/core';
 import {
   FormControl,
