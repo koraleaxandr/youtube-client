@@ -9,10 +9,9 @@
       ],
       "parserOptions": {
         "project": [
-          "tsconfig.json"
-          
+          "tsconfig.json"          
         ],
-        "tsconfigRootDir": "./youtube-client/",
+        "tsconfigRootDir": "",
         "createDefaultProgram": true
       },
       "extends": [
