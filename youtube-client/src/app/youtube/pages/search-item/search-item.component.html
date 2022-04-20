@@ -1,0 +1,27 @@
+<div class="item-container">
+  <button class="back-button" title="back" routerLink="/youtube/search">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+  <div class="video-container" *ngIf="selectedItem" [appBoxShadowColorizing]="selectedItem.snippet.publishedAt">
+    <div class="item-thumbnail"
+      [ngStyle]="{'background-image': 'url(' + selectedItem.snippet.thumbnails.high.url + ')'}">
+    </div>
+    <div class="item-description-container">
+      <div class="title">
+        <h2>{{selectedItem.snippet.title}} </h2>
+        <p>{{selectedItem.snippet.publishedAt | date:'fullDate'}}</p>        
+      </div>
+      <div class="description">
+        <h4>Description:</h4>
+        <p>{{selectedItem.snippet.description}}</p>
+      </div>
+      <div class="item-statistic-container">
+        <div class="item-statistic views">{{selectedItem.statistics.viewCount}}</div>
+        <div class="item-statistic likes">{{selectedItem.statistics.likeCount}}</div>
+        <div class="item-statistic dislikes">{{selectedItem.statistics.dislikeCount}}</div>
+        <div class="item-statistic comments">{{selectedItem.statistics.commentCount}}</div>
+      </div>
+      <div class="item-bottom-line" [appColorOnDate]="selectedItem.snippet.publishedAt"></div>
+    </div>
+  </div>
+</div>
