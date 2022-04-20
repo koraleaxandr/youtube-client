@@ -15,7 +15,6 @@ import {
   // HttpParams,
   HttpErrorResponse,
 } from '@angular/common/http';
-
 // import { catchError, retry } from 'rxjs/operators';
 
 import {
@@ -27,7 +26,11 @@ import {
 } from '../models/search-response.model';
 import {
   Item,
+  // SearchedItem,
 } from '../models/search-item.model';
+import {
+  UserAuthServiceService,
+} from '../../auth/services/user-auth-service.service';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +46,8 @@ export class SearchSortService {
 
   searchResponse: SearchResponse | null = null;
 
+  youtubeSearchList: YoutubeSearchList | null = null;
+
   sortedSearchResult: SearchResponse | undefined = undefined;
 
   private changeSortedSearchResult = new Subject < SearchResponse | undefined >();
@@ -53,13 +58,16 @@ export class SearchSortService {
 
   searchTextChanged$ = this.searchTextChanged.asObservable();
 
-  constructor(private http: HttpClient) {
+  authService: UserAuthServiceService;
+
+  constructor(authService: UserAuthServiceService, private http: HttpClient) {
+    this.authService = authService;
     this.searchTextChanged.pipe(
       debounceTime(3000),
       catchError(this.handleError),
     ).subscribe((searchString) => {
       console.log(searchString);
-      this.getSearchDataFromGit();
+      this.getSearchData(searchString);
     });
   }
 
@@ -74,13 +82,14 @@ export class SearchSortService {
     });
   }
 
-  public async getSearchData(): Promise < void > {
-    const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=sunset%7Cbeach&type=video&key=[YOUR_API_KEY]'
-    `;
+  public async getSearchData(searchString: string): Promise < void > {
+    const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchString.replace(' ', '%7')}&type=video&key=${this.authService.userSettings.userAuthToken}`;
+
+    console.log(url);
 
     this.http.get<SearchResponse>(url).subscribe((data: SearchResponse) => {
       this.searchResponse = { ...data };
-      console.log(this.searchResponse);
+      console.log(this.youtubeSearchList);
       this.getSearchResponse();
     });
   }
@@ -158,7 +167,11 @@ export class SearchSortService {
   }
 
   getItemForId(id: string): Item {
-    const detailedItem: Item = (this.sortedSearchResult as SearchResponse).items.filter((element) => (element.id === id))[0] as Item;
+    const detailedItem: Item = ((this.sortedSearchResult as SearchResponse).items).filter((element) => (element.id.videoId === id))[0] as Item;
     return detailedItem;
+  }
+
+  private generateSearchString(searchString: string): string {
+    return searchString.replace(' ', '%7');
   }
 }

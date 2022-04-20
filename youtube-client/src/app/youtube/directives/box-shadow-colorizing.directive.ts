@@ -23,7 +23,7 @@ export class BoxShadowColorizingDirective implements OnInit {
     const MILLISECONDS_IN_WEEK: number = 7 * 24 * 60 * 60 * 1000;
     const YELLOW_PUBLICATION_PERIOD_START_MONTH: number = 6;
     const YELLOW_PUBLICATION_PERIOD_END_MONTH: number = 1;
-    const today = new Date('2019-10-15T15:00:14.000Z');
+    const today = new Date();
     const publicationDate = new Date(publishedAt);
     const getDateYear = (date: Date): number => Number(date.getUTCFullYear());
     const getDateMonth = (date: Date): number => (Number(date.getUTCMonth() + 1) + getDateYear(date) * 12);

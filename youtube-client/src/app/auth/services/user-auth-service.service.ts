@@ -35,6 +35,7 @@ export class UserAuthServiceService {
   getIsAuthorizedStatus(): void {
     this.isAuthorized = localStorage.getItem('isAuthorized') ? localStorage.getItem('isAuthorized') as string : 'false';
     this.userSettings.userName = this.isAuthorized === 'true' ? this.getSavedLocalUser()?.userName as string : '';
+    this.userSettings.userAuthToken = this.isAuthorized === 'true' ? this.getSavedLocalUser()?.userAuthToken as string : '';
     this.logInOutUser(this.isAuthorized);
   }
 
