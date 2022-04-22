@@ -3,19 +3,15 @@ import {
 } from '@angular/core';
 import {
   catchError,
-  // debounce,
   debounceTime,
   Subject,
-  // Observable,
   throwError,
 } from 'rxjs';
 import {
   HttpClient,
-  // HttpHeaders,
-  // HttpParams,
+  HttpParams,
   HttpErrorResponse,
 } from '@angular/common/http';
-// import { catchError, retry } from 'rxjs/operators';
 
 import {
   SortSettings,
@@ -26,7 +22,6 @@ import {
 } from '../models/search-response.model';
 import {
   Item,
-  // SearchedItem,
 } from '../models/search-item.model';
 import {
   UserAuthServiceService,
@@ -81,8 +76,14 @@ export class SearchSortService {
   }
 
   public async getSearchData(searchString: string): Promise < void > {
-    const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${searchString.replace(' ', '%7')}&type=video&maxResults=15&key=${this.authService.userSettings.userAuthToken}`;
-    this.http.get<YoutubeSearchList>(url).subscribe(async (data: YoutubeSearchList) => {
+    const url = 'https://youtube.googleapis.com/youtube/v3/search?';
+    this.http.get<YoutubeSearchList>(url, {
+      params: new HttpParams()
+        .set('part', 'snippet')
+        .set('q', searchString.replace(' ', '%7'))
+        .set('maxResults', 15)
+        .set('type', 'video'),
+    }).subscribe(async (data: YoutubeSearchList) => {
       this.youtubeSearchList = { ...data };
       await this.getStatisticsForSearchedItems();
     });
@@ -90,11 +91,18 @@ export class SearchSortService {
 
   private async getStatisticsForSearchedItems(): Promise< void > {
     const searchedItemsString: string = this.getSearchStringForStatisticsQuery(this.youtubeSearchList);
-    const url: string = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${searchedItemsString}&maxResults=15&access_token=AIzaSyDymexQ-mAOw13v6xGt4nDgQk9RavcQs4s&key=${this.authService.userSettings.userAuthToken}`;
-    await this.http.get<SearchResponse>(url).subscribe(async (data: SearchResponse) => {
-      this.searchResponse = { ...data };
-      this.getSearchResponse();
-    });
+    const url: string = 'https://youtube.googleapis.com/youtube/v3/videos?';
+    await this.http.get<SearchResponse>(url, {
+      params: new HttpParams()
+        .set('part', 'snippet, contentDetails, statistics')
+        .set('id', searchedItemsString)
+        .set('maxResults', 15)
+        .set('access_token', this.authService.userSettings.userAuthToken),
+    })
+      .subscribe(async (data: SearchResponse) => {
+        this.searchResponse = { ...data };
+        this.getSearchResponse();
+      });
   }
 
   async getSearchResponse(): Promise < void > {

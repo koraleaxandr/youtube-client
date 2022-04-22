@@ -13,8 +13,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
+import { httpInterceptorProviders } from './shared/interceptors/interceptor-provider';
 
 import { HeaderComponent } from './core/components/header/header.component';
 import { HeaderSearchComponent } from './core/components/header/header-search/header-search.component';
@@ -47,7 +47,7 @@ import { AuthenticationModule } from './auth/authentication.module';
     AuthenticationModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
