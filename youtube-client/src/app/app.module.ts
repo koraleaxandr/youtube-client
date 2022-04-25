@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 
+import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { httpInterceptorProviders } from './shared/interceptors/interceptor-provider';
@@ -23,6 +24,7 @@ import { DropdownSettingsComponent } from './youtube/components/dropdown-setting
 import { AngularMaterialModule } from './shared/components/angular-material.module';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
 import { AuthenticationModule } from './auth/authentication.module';
+import { reducers, metaReducers } from './redux/reducers';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,9 @@ import { AuthenticationModule } from './auth/authentication.module';
     FlexLayoutModule,
     AuthenticationModule,
     AppRoutingModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+    }),
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
