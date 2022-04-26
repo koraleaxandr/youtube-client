@@ -1,20 +1,24 @@
 import {
+  Action,
+  ActionReducerMap,
   // ActionReducer,
   // ActionReducerMap,
   // createFeatureSelector,
   // createSelector,
   MetaReducer,
 } from '@ngrx/store';
-import { environment } from '../../../environments/environment';
 
+import { environment } from '../../../environments/environment';
+// import { State } from '../models/store.models';
+import * as Cards from './video-card.reducer';
 import { videoCardsReducer } from './video-card.reducer';
 
 export interface State {
-  cards: ReadonlyArray<VideoCard>;
-  search: ReadonlyArray<SearchResponse>;
+  cards: Cards.State;
+// search: Search.State;
 }
 
-export const reducers: ActionReducerMap<State> = {
+export const reducers: ActionReducerMap<State, Action> = {
   videoCardsReducer,
 };
 

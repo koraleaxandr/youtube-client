@@ -1,5 +1,7 @@
-import { createAction, props } from '@ngrx/store';
-import { VideoCard } from '../../youtube/models/video-card.model';
+/* eslint-disable max-classes-per-file */
+import { Action } from '@ngrx/store';
+
+import { VideoCard } from 'src/app/youtube/models/video-card.model';
 
 export enum CardsActions {
   CreateCard = '[Card List] Add VideoCard',
@@ -8,20 +10,30 @@ export enum CardsActions {
   GetCardsList = '[Card List] Get Stored VideoCards',
 }
 
-export const addCard = createAction(
-  CardsActions.CreateCard,
-  props<{ card: VideoCard }>(),
-);
+export class CreateCard implements Action {
+  readonly type = CardsActions.CreateCard;
 
-export const removeCard = createAction(
-  CardsActions.RemoveCard,
-  props<{ videoUrl: string }>(),
-);
+  constructor(public payload: { card: VideoCard }) {}
+}
 
-export const removeAllCards = createAction(
-  CardsActions.RemoveAllCards,
-);
+export class RemoveCard implements Action {
+  readonly type = CardsActions.RemoveCard;
 
-export const getCardsList = createAction(
-  CardsActions.GetCardsList,
-);
+  constructor(public payload: { videoUrl: string }) {}
+}
+
+export class RemoveAllCards implements Action {
+  readonly type = CardsActions.RemoveAllCards;
+}
+
+export class GetCardsList implements Action {
+  readonly type = CardsActions.GetCardsList;
+
+  constructor(public payload: { cards: VideoCard[] }) {}
+}
+
+export type CardsUnion =
+  | CreateCard
+  | RemoveCard
+  | RemoveAllCards
+  | GetCardsList;
