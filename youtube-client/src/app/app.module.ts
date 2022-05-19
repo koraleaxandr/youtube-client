@@ -24,7 +24,7 @@ import { DropdownSettingsComponent } from './youtube/components/dropdown-setting
 import { AngularMaterialModule } from './shared/components/angular-material.module';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
 import { AuthenticationModule } from './auth/authentication.module';
-import { reducers, metaReducers } from './redux/reducers/index';
+import { reducers } from './redux/reducers/index';
 
 @NgModule({
   declarations: [
@@ -48,9 +48,7 @@ import { reducers, metaReducers } from './redux/reducers/index';
     FlexLayoutModule,
     AuthenticationModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-    }),
+    StoreModule.forRoot(reducers),
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

@@ -1,4 +1,4 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { SearchResponse } from '../../youtube/models/search-response.model';
 
 enum SearchActions {
@@ -14,4 +14,4 @@ export const getStoredSearch = createAction(
 export const deleteStoredSearch = createAction(
   SearchActions.DeleteStoredSearch,
 );
-export const addStoredSearch = createAction(SearchActions.AddStoredSearch, props<{ search: SearchResponse }>());
+export const addStoredSearch = createAction(SearchActions.AddStoredSearch, props< SearchResponse >());

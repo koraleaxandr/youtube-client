@@ -6,13 +6,16 @@ import {
   debounceTime,
   Subject,
   throwError,
+  distinctUntilChanged,
 } from 'rxjs';
 import {
   HttpClient,
   HttpParams,
   HttpErrorResponse,
 } from '@angular/common/http';
-
+import { Store } from '@ngrx/store';
+import { addStoredSearch } from '../../redux/actions/search.actions';
+import { AppState } from '../../redux/models/state.models';
 import {
   SortSettings,
 } from '../models/sort-settings.model';
@@ -55,7 +58,7 @@ export class SearchSortService {
 
   authService: UserAuthServiceService;
 
-  constructor(authService: UserAuthServiceService, private http: HttpClient) {
+  constructor(authService: UserAuthServiceService, private http: HttpClient, private store: Store<AppState>) {
     this.authService = authService;
     this.searchTextChanged.pipe(
       debounceTime(1000),
@@ -110,6 +113,9 @@ export class SearchSortService {
     if (this.searchResponse) {
       this.sortedSearchResult = await JSON.parse(JSON.stringify(this.searchResponse));
       await this.sortSearchResponse(this.searchResponse);
+      console.log(this.searchResponse);
+      console.log(this.sortedSearchResult);
+      this.store.dispatch(addStoredSearch(this.sortedSearchResult as SearchResponse));
       this.changeSortedSearchResult.next(this.sortedSearchResult);
     }
   }

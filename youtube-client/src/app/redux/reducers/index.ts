@@ -1,26 +1,14 @@
 import {
   Action,
-  ActionReducerMap,
-  // ActionReducer,
-  // ActionReducerMap,
-  // createFeatureSelector,
-  // createSelector,
-  MetaReducer,
+  ActionReducer,
 } from '@ngrx/store';
-
-import { State } from '../models/state.model';
-import { environment } from '../../../environments/environment';
 import { videoCardsReducer } from './video-card.reducer';
 import { searchReducer } from './search.reducer';
+import { VideoCard } from '../../youtube/models/video-card.model';
+import { SearchResponse } from '../../youtube/models/search-response.model';
 
-export const reducers: ActionReducerMap<State> = {
+export const reducers: {
+  videoCardsReducer: ActionReducer<VideoCard[], Action>;
+  searchReducer: ActionReducer<SearchResponse[], Action> } = {
   videoCardsReducer, searchReducer,
-
 };
-
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
-
-// export const appState = {
-//   cards: videoCardsReducer,
-//   search: searchReducer,
-// };
