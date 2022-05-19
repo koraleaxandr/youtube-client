@@ -1,11 +1,19 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { getCardsList } from './actions/video-card.actions';
-import { VideoCard } from '../../youtube/models/video-card.model';
-
-export const initialState: ReadonlyArray<VideoCard> = [];
+import { initialCardsState } from '../models/state.model';
+import * as CardsActions from './actions/video-card.actions';
 
 export const videoCardsReducer = createReducer(
-  initialState,
-  on(getCardsList, (state, { cards }) => cards),
+  initialCardsState,
+  on(CardsActions.getCardsList, (state) => ({ ...state })),
+  on(CardsActions.addCard, (state, { card }) => ({ ...state, cards: [...state.cards, card] })),
+  on(CardsActions.removeAllCards, (state) => ({ ...state, cards: [] })),
+  on(CardsActions.removeCard, (state, { videoUrl }) => ({
+    ...state,
+    cards: [...state.cards.filter((card) => card.videoUrl !== videoUrl)],
+  })),
+  on(CardsActions.getCardByUrl, (state, { videoUrl }) => ({
+    ...state,
+    cards: [...state.cards.filter((card) => card.videoUrl === videoUrl)],
+  })),
 );

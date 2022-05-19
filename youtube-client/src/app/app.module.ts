@@ -24,7 +24,7 @@ import { DropdownSettingsComponent } from './youtube/components/dropdown-setting
 import { AngularMaterialModule } from './shared/components/angular-material.module';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
 import { AuthenticationModule } from './auth/authentication.module';
-import { reducers, metaReducers } from './redux/reducers';
+import { reducers, metaReducers } from './redux/reducers/index';
 
 @NgModule({
   declarations: [

@@ -59,6 +59,7 @@ export class SearchSortService {
     this.authService = authService;
     this.searchTextChanged.pipe(
       debounceTime(1000),
+      distinctUntilChanged(),
       catchError(this.handleError),
     ).subscribe((searchString) => {
       this.getSearchData(searchString);
