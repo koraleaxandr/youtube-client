@@ -1,5 +1,3 @@
-import { createReducer, on } from '@ngrx/store';
-
 import { initialCardsState } from '../models/state.model';
 import * as CardsActions from './actions/video-card.actions';
 
