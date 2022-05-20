@@ -1,9 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from '../shared/shared.module';
 
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { SearchItemComponent } from './pages/search-item/search-item.component';
@@ -24,8 +23,7 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
   imports: [
     CommonModule,
     FormsModule,
-    MatIconModule,
-    MatInputModule,
+    SharedModule,
     ReactiveFormsModule,
     YoutubeRoutingModule,
   ],

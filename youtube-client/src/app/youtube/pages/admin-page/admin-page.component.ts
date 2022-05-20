@@ -14,13 +14,10 @@ import {
 } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import {
-  MyErrorStateMatcher,
-} from '../../../auth/services/error-state.service';
-import {
-  VideoCard,
-} from '../../models/video-card.model';
+import { MyErrorStateMatcher } from '../../../auth/services/error-state.service';
+import { VideoCard } from '../../models/video-card.model';
 import { addCard } from '../../../redux/actions/video-card.actions';
+import { MessageComponent } from '../../../shared/components/message/message.component';
 
 @Component({
   selector: 'app-admin-page',
@@ -65,6 +62,9 @@ export class AdminPageComponent {
       createDate: this.createNewCardForm.controls['dateFormControl'].value,
     };
     this.store.dispatch(addCard({ card: videoCard }));
+    this.dialog.open(MessageComponent, {
+      width: '250px', height: '400px',
+    });
     console.log('card created');
     console.log(JSON.stringify(videoCard));
   }
