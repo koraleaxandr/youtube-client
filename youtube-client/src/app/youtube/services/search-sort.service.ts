@@ -15,7 +15,7 @@ import {
 } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { addStoredSearch } from '../../redux/actions/search.actions';
-import { AppState } from '../../redux/models/state.models';
+import { AppState } from '../../redux/state.models';
 import {
   SortSettings,
 } from '../models/sort-settings.model';
@@ -113,8 +113,6 @@ export class SearchSortService {
     if (this.searchResponse) {
       this.sortedSearchResult = await JSON.parse(JSON.stringify(this.searchResponse));
       await this.sortSearchResponse(this.searchResponse);
-      console.log(this.searchResponse);
-      console.log(this.sortedSearchResult);
       this.store.dispatch(addStoredSearch(this.sortedSearchResult as SearchResponse));
       this.changeSortedSearchResult.next(this.sortedSearchResult);
     }

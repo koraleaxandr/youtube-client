@@ -7,9 +7,8 @@ import {
   Router,
 } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { AppState } from '../../../redux/models/state.models';
-import { getSearch } from '../../../redux/selectors/selectors';
+import { Subject, takeUntil } from 'rxjs';
+import { AppState } from '../../../redux/state.models';
 import {
   Item,
 } from '../../models/search-item.model';
@@ -24,8 +23,6 @@ import { SearchSortService } from '../../services/search-sort.service';
   styleUrls: ['./search-results.component.scss'],
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
-  search$: Observable<SearchResponse[]> = this.store.select(getSearch);
-
   selectedItem ? : Item;
 
   unsubscribe$ = new Subject<void>();
@@ -34,18 +31,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   searchResponse: SearchResponse | undefined;
 
-  constructor(public searchSortService: SearchSortService, private router: Router, private store: Store<AppState>) {
-    this.store.subscribe((state) => console.log(state));
-  }
+  constructor(public searchSortService: SearchSortService, private router: Router, private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    // this.searchResponse = this.searchSortService.sortedSearchResult;
-
-    this.search$.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
-      console.log(value);
-      if (value[0].items.length) {
-        [this.searchResponse] = value;
-      }
+    this.store.pipe(takeUntil(this.unsubscribe$)).subscribe((state) => {
+      this.searchResponse = state.searchReducer.search ? state.searchReducer.search! : undefined;
     });
   }
 

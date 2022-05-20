@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { initialSearchState } from '../models/state.models';
+import { initialSearchState } from '../state.models';
 import * as SearchActions from '../actions/search.actions';
 
 export const searchReducer = createReducer(

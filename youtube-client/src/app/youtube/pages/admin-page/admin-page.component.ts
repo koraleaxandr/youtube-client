@@ -12,23 +12,26 @@ import {
 import {
   Router,
 } from '@angular/router';
-
+import { Store } from '@ngrx/store';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   MyErrorStateMatcher,
 } from '../../../auth/services/error-state.service';
 import {
   VideoCard,
 } from '../../models/video-card.model';
+import { addCard } from '../../../redux/actions/video-card.actions';
 
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss'],
 })
+
 export class AdminPageComponent {
   urlReg: string = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private store: Store, public dialog: MatDialog) {}
 
   createNewCardForm: FormGroup = new FormGroup({
     titleFormControl: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
@@ -61,6 +64,7 @@ export class AdminPageComponent {
       videoUrl: this.createNewCardForm.controls['linkVideoFormControl'].value,
       createDate: this.createNewCardForm.controls['dateFormControl'].value,
     };
+    this.store.dispatch(addCard({ card: videoCard }));
     console.log('card created');
     console.log(JSON.stringify(videoCard));
   }

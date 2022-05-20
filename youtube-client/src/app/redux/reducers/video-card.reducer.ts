@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { initialCardsState } from '../models/state.models';
+import { initialCardsState } from '../state.models';
 import * as CardsActions from '../actions/video-card.actions';
 
 export const videoCardsReducer = createReducer(

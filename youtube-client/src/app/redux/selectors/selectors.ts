@@ -1,10 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { SearchResponse } from '../../youtube/models/search-response.model';
-import { AppState } from '../models/state.models';
+import { AppState } from '../state.models';
 
-export const searchState = (state: AppState) => state.search;
+export const searchState = (state: AppState) => state.searchReducer.search;
 
-export const getSearch = createSelector(searchState, (state: SearchResponse[]) => {
-  console.log(state);
-  return state;
-});
+export const getSearch = createSelector(searchState, (state: SearchResponse) => state);

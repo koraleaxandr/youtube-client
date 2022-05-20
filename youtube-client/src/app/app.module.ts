@@ -21,7 +21,7 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { HeaderSearchComponent } from './core/components/header/header-search/header-search.component';
 import { HeaderLoginComponent } from './core/components/header/header-login/header-login.component';
 import { DropdownSettingsComponent } from './youtube/components/dropdown-settings/dropdown-settings.component';
-import { AngularMaterialModule } from './shared/components/angular-material.module';
+import { AngularMaterialModule } from './shared/angular-material.module';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
 import { AuthenticationModule } from './auth/authentication.module';
 import { reducers } from './redux/reducers/index';
