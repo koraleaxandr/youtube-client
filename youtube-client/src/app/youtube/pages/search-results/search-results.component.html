@@ -6,6 +6,19 @@
     
     Try another search!</pre>
   </div>
+  <div class="search-result-container" *ngIf="createdCards.length">
+    <ul class="cards">
+      <li *ngFor="let card of createdCards">
+        <div class="card-description">
+          <div><span>Title:</span><p>{{ card.title}}</p></div>
+          <div><span>Description:</span><p>{{ card.description}}</p></div>
+          <div><span>Video URL:</span><p>{{ card.videoUrl}}</p></div>
+          <div><span>Image URL:</span><p>{{ card.imgUrl}}</p></div>
+          <div><span>Date:</span><p>{{ card.createDate}}</p></div>
+          </div>
+      </li>
+    </ul>
+  </div>
 <div class="search-result-container" *ngIf="searchResponse?.items?.length">
   <ul class="items">
     <li *ngFor="let item of searchResponse?.items">

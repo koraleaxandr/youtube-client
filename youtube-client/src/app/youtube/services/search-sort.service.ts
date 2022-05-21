@@ -113,8 +113,8 @@ export class SearchSortService {
     if (this.searchResponse) {
       this.sortedSearchResult = await JSON.parse(JSON.stringify(this.searchResponse));
       await this.sortSearchResponse(this.searchResponse);
-      this.store.dispatch(addStoredSearch(this.sortedSearchResult as SearchResponse));
       this.changeSortedSearchResult.next(this.sortedSearchResult);
+      this.store.dispatch(addStoredSearch(this.sortedSearchResult as SearchResponse));
     }
   }
 
@@ -133,6 +133,7 @@ export class SearchSortService {
       this.sortedSearchResult = await JSON.parse(JSON.stringify(this.searchResponse));
       await this.sortSearchResponse(this.searchResponse);
       this.changeSortedSearchResult.next(this.sortedSearchResult);
+      this.store.dispatch(addStoredSearch(this.sortedSearchResult as SearchResponse));
     }
   }
 

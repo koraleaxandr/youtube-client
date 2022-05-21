@@ -12,6 +12,38 @@
   color: #929292;
 }
 
+.cards {
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto;
+  list-style-type: none;
+  padding: 0;
+display:grid;
+grid-template-rows: 54px;
+grid-gap: 10px;
+padding-bottom: 20px;
+}
+
+.card-description {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 235px));
+
+  div {
+    display: flex;
+    flex-flow: column;
+    font-size: medium;
+    border:1px solid #2F80ED;
+
+    span {
+      font-size: small;
+      font-weight: 600;
+      background-color: #2F80ED;
+      color: white;
+    }
+  }
+}
+
 .items {
   width: 100%;
   max-width: 1200px;
@@ -103,7 +135,7 @@ padding-bottom: 30px;
 }
 
 .items button.selected {
-  background-color: rgb(7, 30, 243);
+  background-color: #041dfa;
   color: white;
   border: blue solid 5px;
 }

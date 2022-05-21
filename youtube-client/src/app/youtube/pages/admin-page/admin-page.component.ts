@@ -65,7 +65,6 @@ export class AdminPageComponent {
       this.store.dispatch(addCard({ card: videoCard }));
       this.dialog.open(MessageComponent, {
         width: '250px',
-        height: '400px',
         data: { card: videoCard, title: 'card created' },
       });
     }

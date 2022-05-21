@@ -22,7 +22,7 @@ import { DropdownSettingsComponent } from './youtube/components/dropdown-setting
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
 import { AuthenticationModule } from './auth/authentication.module';
 import { SharedModule } from './shared/shared.module';
-import { reducers } from './redux/reducers/index';
+import { appState } from './redux/reducers/index';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { reducers } from './redux/reducers/index';
     AuthenticationModule,
     AppRoutingModule,
     SharedModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(appState),
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

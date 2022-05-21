@@ -16,6 +16,7 @@ import {
   SearchResponse,
 } from '../../models/search-response.model';
 import { SearchSortService } from '../../services/search-sort.service';
+import { VideoCard } from '../../models/video-card.model';
 
 @Component({
   selector: 'app-search-results',
@@ -29,13 +30,18 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   date = new Date().toLocaleDateString('en-en');
 
+  createdCards: VideoCard[] = [];
+
   searchResponse: SearchResponse | undefined;
 
   constructor(public searchSortService: SearchSortService, private router: Router, private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.store.pipe(takeUntil(this.unsubscribe$)).subscribe((state) => {
-      this.searchResponse = state.searchReducer.search ? state.searchReducer.search! : undefined;
+      this.searchResponse = state.searchReducer.search ? state.searchReducer.search[state.searchReducer.search.length - 1]! : undefined;
+      this.createdCards = state.videoCardsReducer.cards?.length ? state.videoCardsReducer.cards : [];
+      console.log(this.searchResponse);
+      console.log(state);
     });
   }
 
