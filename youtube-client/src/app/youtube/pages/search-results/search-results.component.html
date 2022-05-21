@@ -1,0 +1,39 @@
+<div class="search-container">
+  <div class="search-result-container" *ngIf="!searchSortService.sortedSearchResult">
+    Try to search something
+  </div>
+  <div class="search-result-container" *ngIf="searchSortService.sortedSearchResult &&!searchSortService.sortedSearchResult?.items?.length"><pre> Sorry, nothing matches.
+    
+    Try another search!</pre>
+  </div>
+  <div class="search-result-container" *ngIf="createdCards.length">
+    <ul class="cards">
+      <li *ngFor="let card of createdCards">
+        <div class="card-description">
+          <div><span>Title:</span><p>{{ card.title}}</p></div>
+          <div><span>Description:</span><p>{{ card.description}}</p></div>
+          <div><span>Video URL:</span><p>{{ card.videoUrl}}</p></div>
+          <div><span>Image URL:</span><p>{{ card.imgUrl}}</p></div>
+          <div><span>Date:</span><p>{{ card.createDate}}</p></div>
+          </div>
+      </li>
+    </ul>
+  </div>
+<div class="search-result-container" *ngIf="searchResponse?.items?.length">
+  <ul class="items">
+    <li *ngFor="let item of searchResponse?.items">
+      <div class="list-item-thumbnail"
+        [ngStyle]="{'background-image': 'url(' + item.snippet.thumbnails.medium.url + ')'}"></div>
+        <div class="item-statistic-container">
+          <div *ngIf="item.statistics" class="item-statistic views">{{item.statistics.viewCount || 0}}</div>
+          <div *ngIf="item.statistics" class="item-statistic likes">{{item.statistics.likeCount || 0}}</div>
+          <div *ngIf="item.statistics" class="item-statistic dislikes">{{item.statistics.dislikeCount || 0}}</div>
+          <div *ngIf="item.statistics" class="item-statistic comments">{{item.statistics.commentCount || 0}}</div>
+        </div>
+      <p class="badge">{{item.snippet.title | uppercase}}</p>
+      <button [class.selected]="item === selectedItem" type="button" (click)="onSelect(item)">more...</button>
+      <div class="item-bottom-line" [appColorOnDate]="item.snippet.publishedAt"></div>
+    </li>
+  </ul>
+</div>
+</div>

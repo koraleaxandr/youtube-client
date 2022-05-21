@@ -1,0 +1,28 @@
+.user-login-container {
+  min-width: 200px;
+  display: flex;
+  align-content: center;
+  justify-content: flex-end;
+  margin: 0 15px;
+  justify-self: flex-end;
+  font-family: Roboto;
+  font-size: 16px;
+}
+
+.user-logo {
+  height: 24px;
+  width: 24px;
+  background-image: url(../../../../../assets/svg/Login.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0 10px;
+  box-shadow: none;
+}
+
+.log-out-button {
+  height: 24px;
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

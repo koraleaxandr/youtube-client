@@ -1,0 +1,76 @@
+.header-search-container {
+  position:relative;
+  min-width: 396px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  button {
+    height: 24px;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  mat-icon {
+    color: #2F80ED;
+    background-color: #ffffff;
+  }
+}
+
+.search-dropdown-settings {
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../../../assets/svg/search_settings.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.app-logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  background-image: url(../../../../../assets/svg/logo.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.search-button {
+  position: relative;
+  height: 24px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 14px;
+}
+
+.header-search-input {
+  position:relative;
+  min-width: 400px;
+  height: 24px;
+  color: #929292;
+}
+
+.header-search-container input:focus {
+  outline: none !important;
+  outline-style: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+  color: #333333;
+}
+
+.clear-button{
+  position: absolute;
+  margin: 0px;
+  height: 18px;
+  width: 18px;
+  right: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  .span {
+  line-height: 18px;
+  top: -10px;
+      vertical-align: top;
+}
+}

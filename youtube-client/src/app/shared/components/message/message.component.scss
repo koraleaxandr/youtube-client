@@ -1,0 +1,15 @@
+.modal-content {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-description {
+    font-size:1.5rem;
+    color:rgb(3, 116, 78);
+
+    span {
+        font-weight: 700;
+    }
+}

@@ -1,0 +1,87 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center top">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Create new card</mat-card-title>
+    </mat-card-header>
+    <form class="example-form" [formGroup]="createNewCardForm" (ngSubmit)="getNewVideoParams()">
+      <mat-card-content>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Title</mat-label>
+          <input type="text" matInput formControlName="titleFormControl" [errorStateMatcher]="matcher" placeholder=""
+            name="title">
+          <mat-hint></mat-hint>
+          <mat-error
+            *ngIf="createNewCardForm.controls['titleFormControl'].hasError('minlength') && !createNewCardForm.hasError('required')">
+            The title is too short
+          </mat-error>
+          <mat-error
+            *ngIf="createNewCardForm.controls['titleFormControl'].hasError('maxlength') && !createNewCardForm.hasError('required')">
+            The title is too long
+          </mat-error>
+          <mat-error *ngIf="createNewCardForm.controls['titleFormControl'].hasError('required')">
+            Please enter a title
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Description</mat-label>
+          <input type="text" matInput formControlName="descriptionFormControl" [errorStateMatcher]="matcher"
+            placeholder="" name="title">
+          <mat-hint></mat-hint>
+          <mat-error
+            *ngIf="createNewCardForm.controls['descriptionFormControl'].hasError('maxlength') && !createNewCardForm.hasError('required')">
+            The description is too long
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Img</mat-label>
+          <input type="url" matInput formControlName="linkImgFormControl" [errorStateMatcher]="matcher" placeholder=""
+            name="linkImg">
+          <mat-hint></mat-hint>
+          <mat-error
+            *ngIf="createNewCardForm.controls['linkImgFormControl'].hasError('pattern') && !createNewCardForm.hasError('required')">
+            The image link is invalid
+          </mat-error>
+          <mat-error *ngIf="createNewCardForm.controls['linkImgFormControl'].hasError('required')">
+            Please enter a link to the image
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Video</mat-label>
+          <input type="url" matInput formControlName="linkVideoFormControl" [errorStateMatcher]="matcher" placeholder=""
+            name="linkImg">
+          <mat-hint></mat-hint>
+          <mat-error
+            *ngIf="createNewCardForm.controls['linkVideoFormControl'].hasError('pattern') && !createNewCardForm.hasError('required')">
+            The video link is invalid
+          </mat-error>
+          <mat-error *ngIf="createNewCardForm.controls['linkVideoFormControl'].hasError('required')">
+            Please enter a link to the video
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Creation date</mat-label>
+          <input type="date" matInput formControlName="dateFormControl" [errorStateMatcher]="matcher" placeholder=""
+            name="linkImg">
+          <mat-hint></mat-hint>
+          <mat-error
+            *ngIf="createNewCardForm.controls['dateFormControl'].hasError('invalidDate') && !createNewCardForm.hasError('required')">
+            The date is invalid
+          </mat-error>
+          <mat-error *ngIf="createNewCardForm.controls['dateFormControl'].hasError('required')">
+            Please enter a creation date"
+          </mat-error>
+        </mat-form-field>
+
+      </mat-card-content>
+      <div class="buttons-container">
+        <a routerLink="/youtube">Home</a>
+        <button type="submit" class="btn-block"[disabled]="createNewCardForm.status !== 'VALID'">Create new card</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
