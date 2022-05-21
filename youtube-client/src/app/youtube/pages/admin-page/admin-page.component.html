@@ -80,7 +80,7 @@
       </mat-card-content>
       <div class="buttons-container">
         <a routerLink="/youtube">Home</a>
-        <button type="submit" class="btn-block">Create new card</button>
+        <button type="submit" class="btn-block"[disabled]="createNewCardForm.status !== 'VALID'">Create new card</button>
       </div>
     </form>
   </mat-card>

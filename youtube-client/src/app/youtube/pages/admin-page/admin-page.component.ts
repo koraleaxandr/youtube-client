@@ -13,7 +13,7 @@ import {
   Router,
 } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MyErrorStateMatcher } from '../../../auth/services/error-state.service';
 import { VideoCard } from '../../models/video-card.model';
 import { addCard } from '../../../redux/actions/video-card.actions';
@@ -54,18 +54,20 @@ export class AdminPageComponent {
   }
 
   getNewVideoParams() {
-    const videoCard: VideoCard = {
-      title: this.createNewCardForm.controls['titleFormControl'].value,
-      description: this.createNewCardForm.controls['descriptionFormControl'].value,
-      imgUrl: this.createNewCardForm.controls['linkVideoFormControl'].value,
-      videoUrl: this.createNewCardForm.controls['linkVideoFormControl'].value,
-      createDate: this.createNewCardForm.controls['dateFormControl'].value,
-    };
-    this.store.dispatch(addCard({ card: videoCard }));
-    this.dialog.open(MessageComponent, {
-      width: '250px', height: '400px',
-    });
-    console.log('card created');
-    console.log(JSON.stringify(videoCard));
+    if (this.createNewCardForm.status === 'VALID') {
+      const videoCard: VideoCard = {
+        title: this.createNewCardForm.controls['titleFormControl'].value,
+        description: this.createNewCardForm.controls['descriptionFormControl'].value,
+        imgUrl: this.createNewCardForm.controls['linkVideoFormControl'].value,
+        videoUrl: this.createNewCardForm.controls['linkVideoFormControl'].value,
+        createDate: this.createNewCardForm.controls['dateFormControl'].value,
+      };
+      this.store.dispatch(addCard({ card: videoCard }));
+      this.dialog.open(MessageComponent, {
+        width: '250px',
+        height: '400px',
+        data: { card: videoCard, title: 'card created' },
+      });
+    }
   }
 }

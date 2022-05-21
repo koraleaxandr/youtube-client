@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { VideoCard } from '../../../youtube/models/video-card.model';
 
 @Component({
   selector: 'app-message',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./message.component.scss'],
 })
 export class MessageComponent implements OnInit {
-  messageForUser: string = 'hello';
-  // constructor() { }
+  messageForUser: string = 'New Card created';
+
+  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: { card: VideoCard, title: string }) {}
 
   ngOnInit(): void {
-    console.log('11');
+    console.log(this.data);
+    setTimeout(() => {
+      this.dialog.closeAll();
+    }, 3500);
   }
 }
