@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -38,6 +38,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/youtube-client/dist/",
               "budgets": [
                 {
                   "type": "initial",
@@ -59,6 +60,7 @@
               "outputHashing": "all"
             },
             "development": {
+              "baseHref": "/",
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -120,6 +122,7 @@
   },
   "defaultProject": "youtube-client",
   "cli": {
+    "analytics": false,
     "defaultCollection": "@angular-eslint/schematics"
   }
 }

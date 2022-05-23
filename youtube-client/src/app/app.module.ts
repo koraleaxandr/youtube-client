@@ -19,7 +19,7 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { HeaderSearchComponent } from './core/components/header/header-search/header-search.component';
 import { HeaderLoginComponent } from './core/components/header/header-login/header-login.component';
 import { DropdownSettingsComponent } from './youtube/components/dropdown-settings/dropdown-settings.component';
-import { NotFoundComponent } from './core/components/not-found/not-found.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { AuthenticationModule } from './auth/authentication.module';
 import { SharedModule } from './shared/shared.module';
 import { appState } from './redux/reducers/index';

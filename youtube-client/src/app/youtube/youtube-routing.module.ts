@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { SearchItemComponent } from './pages/search-item/search-item.component';
-import { NotFoundComponent } from '../core/components/not-found/not-found.component';
+import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
 const youtubeRoutes: Routes = [

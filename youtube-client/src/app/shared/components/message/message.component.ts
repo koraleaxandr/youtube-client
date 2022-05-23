@@ -13,7 +13,6 @@ export class MessageComponent implements OnInit {
   constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: { card: VideoCard, title: string }) {}
 
   ngOnInit(): void {
-    console.log(this.data);
     setTimeout(() => {
       this.dialog.closeAll();
     }, 3500);

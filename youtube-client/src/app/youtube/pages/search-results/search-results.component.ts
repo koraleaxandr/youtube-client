@@ -40,8 +40,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.store.pipe(takeUntil(this.unsubscribe$)).subscribe((state) => {
       this.searchResponse = state.searchReducer.search ? state.searchReducer.search[state.searchReducer.search.length - 1]! : undefined;
       this.createdCards = state.videoCardsReducer.cards?.length ? state.videoCardsReducer.cards : [];
-      console.log(this.searchResponse);
-      console.log(state);
     });
   }
 

@@ -6,7 +6,6 @@ import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
-  document.getElementsByTagName('base')[0].setAttribute('href', environment.baseHref);
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
