@@ -10,7 +10,7 @@
       "@app/*": ["src/app/*"],
       "@youtube/*": ["src/youtube/*"],
     },
-    "outDir": "./dist/",
+    "outDir": "../dist/",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
