@@ -1,11 +1,14 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
 } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import {
   Router,
   ActivatedRoute,
 } from '@angular/router';
+import { Subject, takeUntil, Observable } from 'rxjs';
 import {
   trigger,
   style,
@@ -35,23 +38,40 @@ import {
     ]),
   ],
 })
-export class SearchItemComponent implements OnInit {
+export class SearchItemComponent implements OnInit, OnDestroy {
   id ? : string;
 
-  selectedItem ? : Item;
+  unsubscribe$ = new Subject<void>();
 
-  searchSortService: SearchSortService;
+  getDetailedItem$: Observable<Item | null> = this.searchSortService.getDetailedItem;
+
+  selectedItem: Item | null = null;
+
+  videoUrl: SafeResourceUrl = '';
 
   constructor(
-    searchSortService: SearchSortService,
+    public searchSortService: SearchSortService,
     private route: ActivatedRoute,
     private router: Router,
+    private sanitizer: DomSanitizer,
   ) {
-    this.searchSortService = searchSortService;
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.id = this.route.snapshot.paramMap.get('id')!;
-    this.selectedItem = this.searchSortService.getItemForId(this.id);
+    this.searchSortService.getItemForId(this.id);
+    this.updateVideoUrl(this.id);
+    this.getDetailedItem$.pipe(takeUntil(this.unsubscribe$)).subscribe(
+      (item)=> this.selectedItem = item
+    );
+  }
+
+  updateVideoUrl(id: string) {
+    const dangerousVideoUrl = 'https://www.youtube.com/embed/' + id;
+    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.unsubscribe();
   }
 }

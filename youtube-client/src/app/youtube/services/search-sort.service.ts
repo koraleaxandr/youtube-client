@@ -54,6 +54,8 @@ export class SearchSortService {
 
   searchTextChanged = new Subject <string>();
 
+  getDetailedItem = new Subject<Item | null>();
+
   searchTextChanged$ = this.searchTextChanged.asObservable();
 
   authService: UserAuthServiceService;
@@ -107,6 +109,25 @@ export class SearchSortService {
         this.searchResponse = { ...data };
         this.getSearchResponse();
       });
+  }
+
+  private async getStatisticsForSearchedItem(id: string): Promise< Item | null > {
+    let searchedItem: Item | null = null;
+    const url: string = 'https://youtube.googleapis.com/youtube/v3/videos?';
+    await this.http.get<SearchResponse>(url, {
+      params: new HttpParams()
+        .set('part', 'snippet, contentDetails, statistics')
+        .set('id', id)
+        .set('maxResults', 1)
+        .set('access_token', this.authService.userSettings.userAuthToken),
+    })
+      .pipe(catchError(this.handleError))
+      .subscribe(async (data: SearchResponse) => {
+        const searchResponse: SearchResponse = { ...data };
+        searchedItem = searchResponse.items[0];
+        this.getDetailedItem.next(searchedItem);
+      });
+      return searchedItem;
   }
 
   async getSearchResponse(): Promise < void > {
@@ -191,9 +212,17 @@ export class SearchSortService {
     return queryString;
   }
 
-  getItemForId(id: string): Item {
-    const detailedItem: Item = ((this.sortedSearchResult as SearchResponse).items).filter((element) => (element.id === id))[0] as Item;
-    return detailedItem;
+  public async getItemForId(id: string): Promise<void> {
+    let detailedItem: Item | null = null;
+    if(this.sortedSearchResult?.items.length) {
+    detailedItem = await ((this.sortedSearchResult as SearchResponse).items).filter((element) => (element.id === id))[0] as Item;
+    this.getDetailedItem.next(detailedItem);
+    } else {
+    detailedItem = await this.getStatisticsForSearchedItem(id) as Item;
+    this.getDetailedItem.next(detailedItem);
+    }
+    console.log(detailedItem);
+    this.getDetailedItem.next(detailedItem);
   }
 
   private generateSearchString(searchString: string): string {
