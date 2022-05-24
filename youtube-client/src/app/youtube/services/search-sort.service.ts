@@ -14,7 +14,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { addStoredSearch } from '../../redux/actions/search.actions';
+import { addStoredSearch, deleteStoredSearch } from '../../redux/actions/search.actions';
 import { AppState } from '../../redux/state.models';
 import {
   SortSettings,
@@ -67,7 +67,13 @@ export class SearchSortService {
       distinctUntilChanged(),
       catchError(this.handleError),
     ).subscribe((searchString) => {
+      const MINIMAL_REQUEST_LENGTH: number = 2;
+      if (searchString.length === 0) {
+        this.store.dispatch(deleteStoredSearch());
+      }
+    if (searchString.length > MINIMAL_REQUEST_LENGTH) {
       this.getSearchData(searchString);
+    }
     });
   }
 

@@ -38,8 +38,7 @@ export class HeaderSearchComponent {
   }
 
   public async searchSubmit(): Promise<void> {
-    const MINIMAL_REQUEST_LENGTH: number = 2;
-    if (this.authService.isAuthorized === 'true' && this.searchString.length > MINIMAL_REQUEST_LENGTH) {
+    if (this.authService.isAuthorized === 'true') {
       this.searchSortService.searchTextChanged.next(this.searchString);
       this.router.navigate(['youtube/search']);
     }

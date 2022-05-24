@@ -1,9 +1,16 @@
 <div class="header-search-container">
   <div class="app-logo"></div>
   <mat-icon>youtube_searched_for</mat-icon>
-  <input [(ngModel)]="searchString" placeholder="What are you want to find out?" class="header-search-input"
-    style="border: transparent" [(ngModel)]="searchString" (input)="searchSubmit()">
-  <div class="search-button" type="button" (click)="searchSubmit()">
+  <mat-form-field class="full-width">
+    
+    <input [(ngModel)]="searchString"(input)="searchSubmit()" type="text" matInput  
+    placeholder="What are you want to find out?" name="search" class="header-search-input">
+    <mat-hint *ngIf="searchString.length > 0 && searchString.length < 2">Search must be minimum 3 char</mat-hint>       
+  </mat-form-field>
+  <!-- <mat-icon>youtube_searched_for</mat-icon> -->
+  <!-- <input [(ngModel)]="searchString" placeholder="What are you want to find out?" class="header-search-input"
+    style="border: transparent" [(ngModel)]="searchString" (input)="searchSubmit()">-->
+  <div class="search-button" type="button" (click)="searchSubmit()"> 
     <mat-icon class="clear-button" *ngIf="searchString" (click)="searchString = ''" (click)="searchSubmit()">clear
     </mat-icon>
   </div>  
