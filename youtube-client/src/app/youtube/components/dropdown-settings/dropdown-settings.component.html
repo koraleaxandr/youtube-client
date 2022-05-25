@@ -1,14 +1,21 @@
 <div class="dropdown-settings-container" [class.active]="toggleSettings === 'on'">
-<div class="search-settings-container">
-  Sorting by:
-  <button [class.selected]="sortSettings.sortByParameter === 'snippet.publishedAt'" (click)="sortSettings.sortByParameter = 'snippet.publishedAt'" (click)="changedSortSettings()">date</button>
-  <button [class.selected]="sortSettings.sortByParameter === 'statistics.viewCount'" (click)="sortSettings.sortByParameter = 'statistics.viewCount'" (click)="changedSortSettings()">count of views</button>
-  <button  [class.selected]="isSortString()"  (click)="sortSettings.sortByParameter = 'string'"(click)="changedSortSettings()">by word or sentence</button>
-  <div class="sort-input-container">
-  <input  type="text" [(ngModel)]="sortSettings.sortString" style="border: transparent" (input)="changedSortSettings()" (keyup)="sortSettings.sortByParameter = 'string'">
-  <button *ngIf="sortSettings.sortString" class="clear-button" matSuffix mat-icon-button aria-label="Clear" (click)="sortSettings.sortString=''" (click)="changedSortSettings()">
-    <mat-icon>clear</mat-icon>
-  </button></div>
+  <div class="search-settings-container">
+    Sorting by:
+    <button [class.selected]="sortSettings.sortByParameter === 'snippet.publishedAt'"
+      (click)="sortSettings.sortByParameter = 'snippet.publishedAt'" (click)="changedSortSettings()">date</button>
+    <button [class.selected]="sortSettings.sortByParameter === 'statistics.viewCount'"
+      (click)="sortSettings.sortByParameter = 'statistics.viewCount'" (click)="changedSortSettings()">count of
+      views</button>
+    
+    <div class="sort-input-container">
+      <button [class.selected]="isSortString()" (click)="sortSettings.sortByParameter = 'string'"
+      (click)="changedSortSettings()">by word or sentence</button>
+      <input type="text" [(ngModel)]="sortSettings.sortString" style="border: transparent"
+        (input)="changedSortSettings()" (keyup)="sortSettings.sortByParameter = 'string'">
+      <button *ngIf="sortSettings.sortString" class="clear-button" matSuffix mat-icon-button aria-label="Clear"
+        (click)="sortSettings.sortString=''" (click)="changedSortSettings()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+  </div>
 </div>
-</div>
-<div class="search-settings-container-pushing" [class.active]="toggleSettings === 'on'"></div>

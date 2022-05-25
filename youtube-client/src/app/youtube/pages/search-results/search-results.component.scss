@@ -7,6 +7,7 @@
   height: 100%;
   max-width: 1440px;
   margin: 0 auto;
+  padding-left: 20px;
   text-align: center;
   font-size: 2rem;
   color: #929292;
@@ -51,7 +52,7 @@ padding-bottom: 20px;
   list-style-type: none;
   padding: 0;
 display:grid;
-grid-template-columns: repeat(4, 1fr);
+grid-template-columns: repeat(auto-fill, 275px);
 grid-gap: 30px;
 padding-bottom: 30px;
 }

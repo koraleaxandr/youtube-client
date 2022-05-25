@@ -1,8 +1,8 @@
 .header-search-container {
   position:relative;
-  min-width: 396px;
-  height: 24px;
+  min-width: 300px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
   button {
@@ -17,7 +17,7 @@
   }
 
   mat-form-field {
-    min-width: 400px;
+    min-width: 300px;
     margin-right: 5px;
   }
 }
@@ -52,7 +52,6 @@
 
 .header-search-input {
   position:relative;
-  min-width: 400px;
   height: 24px;
   color: #929292;
 }
