@@ -7,10 +7,15 @@
   height: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding-left: 20px;
   text-align: center;
   font-size: 2rem;
   color: #929292;
+}
+
+.videos {
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cards {
@@ -46,15 +51,14 @@ padding-bottom: 20px;
 }
 
 .items {
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
   margin: 30px auto;
   list-style-type: none;
   padding: 0;
 display:grid;
-grid-template-columns: repeat(auto-fill, 275px);
+grid-template-columns: repeat(auto-fill, 277px);
 grid-gap: 30px;
-padding-bottom: 30px;
 }
 
 .items li {
