@@ -1,14 +1,8 @@
-import {
-  Component, Output, EventEmitter,
-} from '@angular/core';
-import {
-  Router,
-} from '@angular/router';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { SearchResponse } from '../../../../youtube/models/search-response.model';
-import {
-  UserAuthServiceService,
-} from '../../../../auth/services/user-auth-service.service';
+import { UserAuthServiceService } from '../../../../auth/services/user-auth-service.service';
 import { SearchSortService } from '../../../../youtube/services/search-sort.service';
 
 @Component({
@@ -16,7 +10,6 @@ import { SearchSortService } from '../../../../youtube/services/search-sort.serv
   templateUrl: './header-search.component.html',
   styleUrls: ['./header-search.component.scss'],
 })
-
 export class HeaderSearchComponent {
   searchString: string = '';
 
@@ -32,7 +25,11 @@ export class HeaderSearchComponent {
 
   searchSortService: SearchSortService;
 
-  constructor(authService: UserAuthServiceService, private router: Router, searchSortService: SearchSortService) {
+  constructor(
+    authService: UserAuthServiceService,
+    private router: Router,
+    searchSortService: SearchSortService,
+  ) {
     this.authService = authService;
     this.searchSortService = searchSortService;
   }

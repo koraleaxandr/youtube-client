@@ -1,6 +1,4 @@
-import {
-  Directive, OnInit, ElementRef, Input,
-} from '@angular/core';
+import { Directive, OnInit, ElementRef, Input } from '@angular/core';
 
 @Directive({
   selector: '[appBoxShadowColorizing]',
@@ -15,7 +13,9 @@ export class BoxShadowColorizingDirective implements OnInit {
   }
 
   private highlight(publishedAt: string) {
-    this.el.nativeElement.style.boxShadow = `5px 10px 10px rgba(${this.getColorPublicationDate(publishedAt)}, 0.25)`;
+    this.el.nativeElement.style.boxShadow = `5px 10px 10px rgba(${this.getColorPublicationDate(
+      publishedAt,
+    )}, 0.25)`;
   }
 
   private getColorPublicationDate(publishedAt: string): string {
@@ -26,14 +26,22 @@ export class BoxShadowColorizingDirective implements OnInit {
     const today = new Date();
     const publicationDate = new Date(publishedAt);
     const getDateYear = (date: Date): number => Number(date.getUTCFullYear());
-    const getDateMonth = (date: Date): number => (Number(date.getUTCMonth() + 1) + getDateYear(date) * 12);
+    const getDateMonth = (date: Date): number =>
+      Number(date.getUTCMonth() + 1) + getDateYear(date) * 12;
     const getDateDay = (date: Date): number => Number(date.getUTCDate());
 
-    if ((getDateMonth(today) - getDateMonth(publicationDate)) > YELLOW_PUBLICATION_PERIOD_START_MONTH) {
+    if (
+      getDateMonth(today) - getDateMonth(publicationDate) >
+      YELLOW_PUBLICATION_PERIOD_START_MONTH
+    ) {
       color = '255,0,0';
       return color;
     }
-    if (((getDateMonth(today) - getDateMonth(publicationDate)) === YELLOW_PUBLICATION_PERIOD_START_MONTH) && (getDateDay(today) < getDateDay(publicationDate))) {
+    if (
+      getDateMonth(today) - getDateMonth(publicationDate) ===
+        YELLOW_PUBLICATION_PERIOD_START_MONTH &&
+      getDateDay(today) < getDateDay(publicationDate)
+    ) {
       color = '255,255,0';
       return color;
     }
@@ -41,11 +49,14 @@ export class BoxShadowColorizingDirective implements OnInit {
       color = '255,255,0';
       return color;
     }
-    if ((getDateMonth(today) - getDateMonth(publicationDate) === YELLOW_PUBLICATION_PERIOD_END_MONTH) && (getDateDay(today) > getDateDay(publicationDate))) {
+    if (
+      getDateMonth(today) - getDateMonth(publicationDate) === YELLOW_PUBLICATION_PERIOD_END_MONTH &&
+      getDateDay(today) > getDateDay(publicationDate)
+    ) {
       color = '255,255,0';
       return color;
     }
-    if ((Number(today) - Number(publicationDate.getTime())) <= MILLISECONDS_IN_WEEK) {
+    if (Number(today) - Number(publicationDate.getTime()) <= MILLISECONDS_IN_WEEK) {
       color = '0,0,255';
       return color;
     }

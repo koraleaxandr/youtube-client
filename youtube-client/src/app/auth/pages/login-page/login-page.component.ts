@@ -8,20 +8,14 @@ import {
   FormControl,
   FormGroup,
   Validators,
-  AbstractControl, ValidationErrors, ValidatorFn,
+  AbstractControl,
+  ValidationErrors,
+  ValidatorFn,
 } from '@angular/forms';
-import {
-  Router,
-} from '@angular/router';
-import {
-  UserSettings,
-} from '../../models/user-settings.model';
-import {
-  UserAuthServiceService,
-} from '../../services/user-auth-service.service';
-import {
-  MyErrorStateMatcher,
-} from '../../services/error-state.service';
+import { Router } from '@angular/router';
+import { UserSettings } from '../../models/user-settings.model';
+import { UserAuthServiceService } from '../../services/user-auth-service.service';
+import { MyErrorStateMatcher } from '../../services/error-state.service';
 
 @Component({
   selector: 'app-login-page',
@@ -53,23 +47,29 @@ export class LoginPageComponent implements OnInit {
   }
 
   private passwordMatchingValidator(): ValidatorFn {
-    return (control:AbstractControl) : ValidationErrors | null => {
+    return (control: AbstractControl): ValidationErrors | null => {
       const { value } = control;
       if (!value) {
         return null;
       }
-      const validPassword = (value === this.authService.getSavedLocalUser()?.userPassword as string);
-      return !validPassword ? ({ passwordMatch: true }) : null;
+      const validPassword =
+        value === (this.authService.getSavedLocalUser()?.userPassword as string);
+      return !validPassword ? { passwordMatch: true } : null;
     };
   }
 
   public authorizeForm: FormGroup = new FormGroup({
     emailFormControl: new FormControl('', [Validators.required, Validators.email]),
-    passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(8), this.validatePasswordStrength(), this.passwordMatchingValidator()]),
+    passwordFormControl: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      this.validatePasswordStrength(),
+      this.passwordMatchingValidator(),
+    ]),
   });
 
   private validatePasswordStrength(): ValidatorFn {
-    return (control:AbstractControl) : ValidationErrors | null => {
+    return (control: AbstractControl): ValidationErrors | null => {
       const { value } = control;
       if (!value) {
         return null;
@@ -78,7 +78,7 @@ export class LoginPageComponent implements OnInit {
       const lowerCaseCheck = /[a-z]+/.test(value);
       const numericCheck = /[0-9]+/.test(value);
       const validPassword = upperCaseCheck && lowerCaseCheck && numericCheck;
-      return !validPassword ? ({ passwordStrength: true }) : null;
+      return !validPassword ? { passwordStrength: true } : null;
     };
   }
 

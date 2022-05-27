@@ -19,4 +19,4 @@ const youtubeRoutes: Routes = [
   imports: [RouterModule.forChild(youtubeRoutes)],
   exports: [RouterModule],
 })
-export class YoutubeRoutingModule { }
+export class YoutubeRoutingModule {}

@@ -5,21 +5,17 @@
   ],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
-      "parser": "@typescript-eslint/parser",
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig.json"
-        ],
+        "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
+      "plugins": ["import"],
       "extends": [
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "airbnb-base",
-        "airbnb-typescript/base"
+        "airbnb-typescript/base",
+        "plugin:prettier/recommended"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
@@ -43,9 +39,15 @@
         "class-methods-use-this": "off",
         "no-console": "off",
         "linebreak-style": "off",
-        "max-len": "off"
+        "max-len": "off",
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          }
+        ]
       }
-    },
+    },      
     {
       "files": [
         "*.html"

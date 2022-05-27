@@ -1,15 +1,10 @@
-import {
-  Injectable,
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import {
-  UserSettings,
-} from '../models/user-settings.model';
+import { UserSettings } from '../models/user-settings.model';
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class UserAuthServiceService {
   public userSettings: UserSettings = {
     userName: '',
@@ -33,17 +28,24 @@ export class UserAuthServiceService {
 
   // constructor() { }
   getIsAuthorizedStatus(): void {
-    this.isAuthorized = localStorage.getItem('isAuthorized') ? localStorage.getItem('isAuthorized') as string : 'false';
-    this.userSettings.userName = this.isAuthorized === 'true' ? this.getSavedLocalUser()?.userName as string : '';
-    this.userSettings.userAuthToken = this.isAuthorized === 'true' ? this.getSavedLocalUser()?.userAuthToken as string : '';
+    this.isAuthorized = localStorage.getItem('isAuthorized')
+      ? (localStorage.getItem('isAuthorized') as string)
+      : 'false';
+    this.userSettings.userName =
+      this.isAuthorized === 'true' ? (this.getSavedLocalUser()?.userName as string) : '';
+    this.userSettings.userAuthToken =
+      this.isAuthorized === 'true' ? (this.getSavedLocalUser()?.userAuthToken as string) : '';
     this.logInOutUser(this.isAuthorized);
   }
 
   getSavedLocalUser(): UserSettings | null {
     if (localStorage.getItem('savedUser')) {
-      const savedLocalUser: UserSettings = JSON.parse(localStorage.getItem('savedUser') as string) as UserSettings;
+      const savedLocalUser: UserSettings = JSON.parse(
+        localStorage.getItem('savedUser') as string,
+      ) as UserSettings;
       return savedLocalUser;
-    } return null;
+    }
+    return null;
   }
 
   saveLocalUser(user: UserSettings) {

@@ -1,6 +1,4 @@
-import {
-  Component, OnInit, Input, Output, EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SortSettings } from '../../models/sort-settings.model';
 import { SearchSortService } from '../../services/search-sort.service';
 
@@ -32,7 +30,8 @@ export class DropdownSettingsComponent implements OnInit {
   }
 
   changedSortSettings() {
-    this.sortSettings.sortByIncreaseParameter = this.sortSettings.sortByIncreaseParameter === 'increase' ? 'decrease' : 'increase';
+    this.sortSettings.sortByIncreaseParameter =
+      this.sortSettings.sortByIncreaseParameter === 'increase' ? 'decrease' : 'increase';
     this.changeSortSettings.emit(this.sortSettings);
     this.searchSortService.changeSortSettings(this.sortSettings);
   }

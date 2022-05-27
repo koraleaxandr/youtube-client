@@ -10,7 +10,10 @@ import { VideoCard } from '../../../youtube/models/video-card.model';
 export class MessageComponent implements OnInit {
   messageForUser: string = 'New Card created';
 
-  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: { card: VideoCard, title: string }) {}
+  constructor(
+    public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: { card: VideoCard; title: string },
+  ) {}
 
   ngOnInit(): void {
     setTimeout(() => {

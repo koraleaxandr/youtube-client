@@ -1,27 +1,18 @@
 /* eslint-disable max-classes-per-file */
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   Validators,
-  AbstractControl, ValidationErrors, ValidatorFn,
+  AbstractControl,
+  ValidationErrors,
+  ValidatorFn,
 } from '@angular/forms';
 
-import {
-  Router,
-} from '@angular/router';
-import {
-  UserSettings,
-} from '../../models/user-settings.model';
-import {
-  UserAuthServiceService,
-} from '../../services/user-auth-service.service';
-import {
-  MyErrorStateMatcher,
-} from '../../services/error-state.service';
+import { Router } from '@angular/router';
+import { UserSettings } from '../../models/user-settings.model';
+import { UserAuthServiceService } from '../../services/user-auth-service.service';
+import { MyErrorStateMatcher } from '../../services/error-state.service';
 
 @Component({
   selector: 'app-user-register',
@@ -39,10 +30,7 @@ export class UserRegisterComponent implements OnInit {
 
   authService: UserAuthServiceService;
 
-  constructor(
-    authService: UserAuthServiceService,
-    private router: Router,
-  ) {
+  constructor(authService: UserAuthServiceService, private router: Router) {
     this.authService = authService;
   }
 
@@ -55,13 +43,17 @@ export class UserRegisterComponent implements OnInit {
   registryFormGroup: FormGroup = new FormGroup({
     emailFormControl: new FormControl('', [Validators.required, Validators.email]),
     nameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(8), this.validatePasswordStrength()]),
+    passwordFormControl: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      this.validatePasswordStrength(),
+    ]),
   });
 
   matcher = new MyErrorStateMatcher();
 
   private validatePasswordStrength(): ValidatorFn {
-    return (control:AbstractControl) : ValidationErrors | null => {
+    return (control: AbstractControl): ValidationErrors | null => {
       const { value } = control;
       if (!value) {
         return null;
@@ -70,7 +62,7 @@ export class UserRegisterComponent implements OnInit {
       const lowerCaseCheck = /[a-z]+/.test(value);
       const numericCheck = /[0-9]+/.test(value);
       const validPassword = upperCaseCheck && lowerCaseCheck && numericCheck;
-      return !validPassword ? ({ passwordStrength: true }) : null;
+      return !validPassword ? { passwordStrength: true } : null;
     };
   }
 

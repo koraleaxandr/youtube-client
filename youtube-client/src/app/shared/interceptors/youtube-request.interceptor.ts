@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest,
-} from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import {
-  UserAuthServiceService,
-} from '../../auth/services/user-auth-service.service';
+import { UserAuthServiceService } from '../../auth/services/user-auth-service.service';
 
 @Injectable()
 export class SearchInterceptor implements HttpInterceptor {
@@ -17,10 +13,7 @@ export class SearchInterceptor implements HttpInterceptor {
     this.authService = authService;
   }
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler,
-  ): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const searchReq = req.clone({
       params: req.params.set('key', this.authService.userSettings.userAuthToken),
     });

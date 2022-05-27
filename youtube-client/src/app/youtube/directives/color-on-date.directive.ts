@@ -1,6 +1,4 @@
-import {
-  Directive, OnInit, ElementRef, Input,
-} from '@angular/core';
+import { Directive, OnInit, ElementRef, Input } from '@angular/core';
 
 @Directive({
   selector: '[appColorOnDate]',
@@ -26,14 +24,22 @@ export class ColorOnDateDirective implements OnInit {
     const today = new Date();
     const publicationDate = new Date(publishedAt);
     const getDateYear = (date: Date): number => Number(date.getUTCFullYear());
-    const getDateMonth = (date: Date): number => (Number(date.getUTCMonth() + 1) + getDateYear(date) * 12);
+    const getDateMonth = (date: Date): number =>
+      Number(date.getUTCMonth() + 1) + getDateYear(date) * 12;
     const getDateDay = (date: Date): number => Number(date.getUTCDate());
 
-    if ((getDateMonth(today) - getDateMonth(publicationDate)) > YELLOW_PUBLICATION_PERIOD_START_MONTH) {
+    if (
+      getDateMonth(today) - getDateMonth(publicationDate) >
+      YELLOW_PUBLICATION_PERIOD_START_MONTH
+    ) {
       color = 'red';
       return color;
     }
-    if (((getDateMonth(today) - getDateMonth(publicationDate)) === YELLOW_PUBLICATION_PERIOD_START_MONTH) && (getDateDay(today) < getDateDay(publicationDate))) {
+    if (
+      getDateMonth(today) - getDateMonth(publicationDate) ===
+        YELLOW_PUBLICATION_PERIOD_START_MONTH &&
+      getDateDay(today) < getDateDay(publicationDate)
+    ) {
       color = 'yellow';
       return color;
     }
@@ -41,11 +47,14 @@ export class ColorOnDateDirective implements OnInit {
       color = 'yellow';
       return color;
     }
-    if ((getDateMonth(today) - getDateMonth(publicationDate) === YELLOW_PUBLICATION_PERIOD_END_MONTH) && (getDateDay(today) > getDateDay(publicationDate))) {
+    if (
+      getDateMonth(today) - getDateMonth(publicationDate) === YELLOW_PUBLICATION_PERIOD_END_MONTH &&
+      getDateDay(today) > getDateDay(publicationDate)
+    ) {
       color = 'yellow';
       return color;
     }
-    if ((Number(today) - Number(publicationDate.getTime())) <= MILLISECONDS_IN_WEEK) {
+    if (Number(today) - Number(publicationDate.getTime()) <= MILLISECONDS_IN_WEEK) {
       color = 'blue';
       return color;
     }

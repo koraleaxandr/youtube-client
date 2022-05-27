@@ -1,14 +1,6 @@
-import {
-  Injectable,
-} from '@angular/core';
-import {
-  ErrorStateMatcher,
-} from '@angular/material/core';
-import {
-  FormControl,
-  FormGroupDirective,
-  NgForm,
-} from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',

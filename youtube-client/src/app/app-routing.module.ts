@@ -5,8 +5,16 @@ import { AuthorizeGuard } from './core/guards/authorize.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main' },
-  { path: 'main', canActivate: [AuthorizeGuard], loadChildren: () => import('./youtube/youtube.module').then((m) => m.YoutubeModule) },
-  { path: 'youtube', canActivate: [AuthorizeGuard], loadChildren: () => import('./youtube/youtube.module').then((m) => m.YoutubeModule) },
+  {
+    path: 'main',
+    canActivate: [AuthorizeGuard],
+    loadChildren: () => import('./youtube/youtube.module').then((m) => m.YoutubeModule),
+  },
+  {
+    path: 'youtube',
+    canActivate: [AuthorizeGuard],
+    loadChildren: () => import('./youtube/youtube.module').then((m) => m.YoutubeModule),
+  },
   { path: '**', component: NotFoundComponent },
 ];
 
@@ -14,4 +22,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

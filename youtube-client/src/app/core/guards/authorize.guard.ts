@@ -1,6 +1,4 @@
-import {
-  Injectable,
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -8,32 +6,29 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
-import {
-  Observable,
-} from 'rxjs';
+import { Observable } from 'rxjs';
 
-import {
-  UserAuthServiceService,
-} from '../../auth/services/user-auth-service.service';
+import { UserAuthServiceService } from '../../auth/services/user-auth-service.service';
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthorizeGuard implements CanActivate {
   constructor(private authService: UserAuthServiceService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
-  ): Observable < boolean | UrlTree > | Promise < boolean | UrlTree > | boolean | UrlTree {
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const { url } = state;
 
     return this.checkLogin(url);
   }
 
   checkLogin(url: string): true | UrlTree {
-    if (this.authService.isAuthorized === 'true') { return true; }
+    if (this.authService.isAuthorized === 'true') {
+      return true;
+    }
     this.authService.redirectUrl = url;
     return this.router.parseUrl('/login');
   }

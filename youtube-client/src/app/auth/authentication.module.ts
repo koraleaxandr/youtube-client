@@ -10,10 +10,7 @@ import { UserRegisterComponent } from './pages/user-register/user-register.compo
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 
 @NgModule({
-  declarations: [
-    LoginPageComponent,
-    UserRegisterComponent,
-  ],
+  declarations: [LoginPageComponent, UserRegisterComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -23,4 +20,4 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
     AuthenticationRoutingModule,
   ],
 })
-export class AuthenticationModule { }
+export class AuthenticationModule {}

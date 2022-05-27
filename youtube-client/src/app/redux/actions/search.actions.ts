@@ -7,11 +7,7 @@ enum SearchActions {
   AddStoredSearch = '[Search List] Add Stored Search',
 }
 
-export const getStoredSearch = createAction(
-  SearchActions.GetStoredSearch,
-);
+export const getStoredSearch = createAction(SearchActions.GetStoredSearch);
 
-export const deleteStoredSearch = createAction(
-  SearchActions.DeleteStoredSearch,
-);
-export const addStoredSearch = createAction(SearchActions.AddStoredSearch, props< SearchResponse >());
+export const deleteStoredSearch = createAction(SearchActions.DeleteStoredSearch);
+export const addStoredSearch = createAction(SearchActions.AddStoredSearch, props<SearchResponse>());

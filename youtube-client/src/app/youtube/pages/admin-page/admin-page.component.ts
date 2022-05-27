@@ -1,6 +1,4 @@
-import {
-  Component,
-} from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,9 +7,7 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
-import {
-  Router,
-} from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { MyErrorStateMatcher } from '../../../auth/services/error-state.service';
@@ -24,17 +20,23 @@ import { MessageComponent } from '../../../shared/components/message/message.com
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss'],
 })
-
 export class AdminPageComponent {
   urlReg: string = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
   constructor(private router: Router, private store: Store, public dialog: MatDialog) {}
 
   createNewCardForm: FormGroup = new FormGroup({
-    titleFormControl: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+    titleFormControl: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(20),
+    ]),
     descriptionFormControl: new FormControl('', [Validators.maxLength(255)]),
     linkImgFormControl: new FormControl('', [Validators.required, Validators.pattern(this.urlReg)]),
-    linkVideoFormControl: new FormControl('', [Validators.required, Validators.pattern(this.urlReg)]),
+    linkVideoFormControl: new FormControl('', [
+      Validators.required,
+      Validators.pattern(this.urlReg),
+    ]),
     dateFormControl: new FormControl('', [Validators.required, this.fromToDate()]),
   });
 
@@ -44,7 +46,7 @@ export class AdminPageComponent {
     return (control: AbstractControl): ValidationErrors | null => {
       const fromDate = new Date(control?.value);
       const today = new Date();
-      if (fromDate && (fromDate !== null && today !== null) && fromDate > today) {
+      if (fromDate && fromDate !== null && today !== null && fromDate > today) {
         return {
           [errorName]: true,
         };

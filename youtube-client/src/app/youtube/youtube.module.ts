@@ -20,13 +20,7 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
     BoxShadowColorizingDirective,
     AdminPageComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    SharedModule,
-    ReactiveFormsModule,
-    YoutubeRoutingModule,
-  ],
+  imports: [CommonModule, FormsModule, SharedModule, ReactiveFormsModule, YoutubeRoutingModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class YoutubeModule { }
+export class YoutubeModule {}

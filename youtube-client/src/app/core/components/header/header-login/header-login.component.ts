@@ -1,17 +1,7 @@
-import {
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
-import {
-  Router,
-} from '@angular/router';
-import {
-  Subscription,
-} from 'rxjs';
-import {
-  UserAuthServiceService,
-} from '../../../../auth/services/user-auth-service.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { UserAuthServiceService } from '../../../../auth/services/user-auth-service.service';
 
 @Component({
   selector: 'app-header-login',
@@ -33,11 +23,9 @@ export class HeaderLoginComponent implements OnInit {
 
   constructor(authService: UserAuthServiceService, private router: Router) {
     this.authService = authService;
-    this.subscription = authService.changeUser$.subscribe(
-      (userName) => {
-        this.name = userName;
-      },
-    );
+    this.subscription = authService.changeUser$.subscribe((userName) => {
+      this.name = userName;
+    });
     this.authStatus = authService.isUserAuthorized$.subscribe((userStatus) => {
       this.isAuthorized = userStatus;
     });

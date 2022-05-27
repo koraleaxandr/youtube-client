@@ -1,5 +1,5 @@
 export interface SortSettings {
-  sortByParameter: string,
-  sortByIncreaseParameter: string,
-  sortString: string
+  sortByParameter: string;
+  sortByIncreaseParameter: string;
+  sortString: string;
 }

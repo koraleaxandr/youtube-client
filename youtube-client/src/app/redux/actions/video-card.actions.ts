@@ -9,25 +9,12 @@ enum CardsActions {
   GetCardByUrl = '[Card List] Get VideoCard',
 }
 
-export const addCard = createAction(
-  CardsActions.CreateCard,
-  props<{ card: VideoCard }>(),
-);
+export const addCard = createAction(CardsActions.CreateCard, props<{ card: VideoCard }>());
 
-export const removeCard = createAction(
-  CardsActions.RemoveCard,
-  props<{ videoUrl: string }>(),
-);
+export const removeCard = createAction(CardsActions.RemoveCard, props<{ videoUrl: string }>());
 
-export const removeAllCards = createAction(
-  CardsActions.RemoveAllCards,
-);
+export const removeAllCards = createAction(CardsActions.RemoveAllCards);
 
-export const getCardsList = createAction(
-  CardsActions.GetCardsList,
-);
+export const getCardsList = createAction(CardsActions.GetCardsList);
 
-export const getCardByUrl = createAction(
-  CardsActions.RemoveCard,
-  props<{ videoUrl: string }>(),
-);
+export const getCardByUrl = createAction(CardsActions.RemoveCard, props<{ videoUrl: string }>());
